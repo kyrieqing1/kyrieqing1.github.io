@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/07/17/my-first-blog/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-17T12:25:01.536Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-my-first-blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/17/my-first-blog/" class="article-date">
+  <time datetime="2019-07-17T12:25:01.535Z" itemprop="datePublished">2019-07-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: my first blog<br>date: 2019-07-17 20:13:47<br>tags:</p>
+<h2 id="Arraylist和Linkedlist的区别"><a href="#Arraylist和Linkedlist的区别" class="headerlink" title="Arraylist和Linkedlist的区别"></a>Arraylist和Linkedlist的区别</h2><p> 1.首先我们从它们底层数据结构来分析</p>
+<pre><code>      （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的
+
+              Arraylist的实现原理是采用一个动态对象数组实现的，默认构造方法创建一个空数组
+
+
+
+
+
+     Vector的实现原理也是采用一个动态对象数组实现的，只不过它的默认构造方法创建一个大小为10的对象数组
+
+
+
+
+
+
+
+
+
+（2） Arraylist第一次添加元素时候，扩展容量为10，之后的扩充算法：原来数组大小+原来数组的一半（也就是1.5倍）</code></pre><p>应该可以很清楚的知道ArrayList底层扩容的原理了。而Vector和Arraylist的扩容机制类似，与Vector不同的是，Vector分两种情况如果增量为0的情况下每次扩容容量是翻倍，即为原来的2倍，而当增量&gt;0的时候，扩充为原来的大小加增量，而ArrayList是1.5倍。看似1.5倍增长的很慢，那经常增加大量元素会不会导致经常扩容，数组重新分配导致效率低下呢？其实不然，每次增长为原来的1.5倍实际增长的量会越来越大的<br>   （3）所以Arraylist和Vector不适合进行删除或插入操作</p>
+<pre><code>（4）为了防止数组动态扩充过多，建议创建ArrayList或者Vector时，给定初始容量。
+
+(5)Arraylist多线程中使用不安全，适合在单线程访问时使用，效率较高，而Vector线程安全，适合在多线程访问时使用，效率较低</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/17/my-first-blog/" data-id="cjy780fkw0001m4weh97dmg8k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/17/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/07/17/my-first-blog/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/17/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
