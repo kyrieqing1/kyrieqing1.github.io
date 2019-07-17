@@ -8,17 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+  <meta name="description" content="title: test blogdate: 2019-07-17 23:09:38tags:这个下面穿插图片">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2019/07/17/my-first-blog/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/07/17/test-blog/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+<meta property="og:description" content="title: test blogdate: 2019-07-17 23:09:38tags:这个下面穿插图片">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-17T12:25:01.536Z">
+<meta property="og:image" content="http://yoursite.com/.com//jietu.png">
+<meta property="og:updated_time" content="2019-07-17T15:43:40.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+<meta name="twitter:description" content="title: test blogdate: 2019-07-17 23:09:38tags:这个下面穿插图片">
+<meta name="twitter:image" content="http://yoursite.com/.com//jietu.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,36 +156,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-my-first-blog" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-test-blog" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: my first blog<br>date: 2019-07-17 20:13:47<br>tags:</p>
-<h2 id="Arraylist和Linkedlist的区别"><a href="#Arraylist和Linkedlist的区别" class="headerlink" title="Arraylist和Linkedlist的区别"></a>Arraylist和Linkedlist的区别</h2><p> 1.首先我们从它们底层数据结构来分析</p>
-<pre><code>      （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的
+<p>title: test blog<br>date: 2019-07-17 23:09:38<br>tags:<br>这个下面穿插图片<br><img src="/.com//jietu.png" alt></p>
 
-              Arraylist的实现原理是采用一个动态对象数组实现的，默认构造方法创建一个空数组
-
-
-
-
-
-     Vector的实现原理也是采用一个动态对象数组实现的，只不过它的默认构造方法创建一个大小为10的对象数组
-
-
-
-
-
-
-
-
-
-（2） Arraylist第一次添加元素时候，扩展容量为10，之后的扩充算法：原来数组大小+原来数组的一半（也就是1.5倍）</code></pre><p>应该可以很清楚的知道ArrayList底层扩容的原理了。而Vector和Arraylist的扩容机制类似，与Vector不同的是，Vector分两种情况如果增量为0的情况下每次扩容容量是翻倍，即为原来的2倍，而当增量&gt;0的时候，扩充为原来的大小加增量，而ArrayList是1.5倍。看似1.5倍增长的很慢，那经常增加大量元素会不会导致经常扩容，数组重新分配导致效率低下呢？其实不然，每次增长为原来的1.5倍实际增长的量会越来越大的<br>   （3）所以Arraylist和Vector不适合进行删除或插入操作</p>
-<pre><code>（4）为了防止数组动态扩充过多，建议创建ArrayList或者Vector时，给定初始容量。
-
-(5)Arraylist多线程中使用不安全，适合在单线程访问时使用，效率较高，而Vector线程安全，适合在多线程访问时使用，效率较低</code></pre>
       
 
       
@@ -262,7 +242,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/17/my-first-blog/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/17/test-blog/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,18 +256,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/17/test-blog/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/17/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2019/07/17/my-first-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   
