@@ -8,13 +8,31 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>我是个弟弟</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析                                        &amp;nbsp; &amp;nbsp;悲观锁： &amp;nbsp; &amp;nbsp; &amp;nbsp;顾名思义，悲观锁，正如其名，它指的是对数">
+<meta property="og:type" content="article">
 <meta property="og:title" content="我是个弟弟">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/mysql中的悲观锁和乐观锁的应用场景和实现方式/index.html">
 <meta property="og:site_name" content="我是个弟弟">
+<meta property="og:description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析                                        &amp;nbsp; &amp;nbsp;悲观锁： &amp;nbsp; &amp;nbsp; &amp;nbsp;顾名思义，悲观锁，正如其名，它指的是对数">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210648493-302299321.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712211453153-2042737623.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712212827275-532282494.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213042988-1503940553.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213802765-1374589267.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712214316437-2069633589.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000920166-2060373838.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000654722-664730505.png">
+<meta property="og:image" content="http://dl.iteye.com/upload/picture/pic/125402/22a9518f-e355-315f-8d66-d91af4fda723.jpg">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713014150170-1752142532.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013833245-27359745.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013926696-791455815.png">
+<meta property="og:updated_time" content="2019-07-25T03:47:07.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我是个弟弟">
+<meta name="twitter:description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析                                        &amp;nbsp; &amp;nbsp;悲观锁： &amp;nbsp; &amp;nbsp; &amp;nbsp;顾名思义，悲观锁，正如其名，它指的是对数">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png">
   
     <link rel="alternative" href="/atom.xml" title="我是个弟弟" type="application/atom+xml">
   
@@ -150,230 +168,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-java并发问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: java并发问题<br>date: 2019-07-25 12:42:44<br>tags:</p>
-<div id="topics">
-    <div class="post">
-        <h1 class="postTitle">
-            <a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/qjjazry/p/6581568.html" target="_blank" rel="noopener">Java并发问题--乐观锁与悲观锁以及乐观锁的一种实现方式-CAS</a>
-        </h1>
-        <div class="clear"></div>
-        <div class="postBody">
-            <div id="cnblogs_post_body" class="blogpost-body"><p><strong><span style="font-size: 16px;">首先介绍一些乐观锁与悲观锁:</span></strong></p>
-<p><span style="font-size: 16px;">　　悲观锁：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。再比如<span style="color: #ff0000;">Java里面的同步原语</span><span style="color: #ff0000;">synchronized关键字的实现也是悲观锁</span>。</span></p>
-<p><span style="font-size: 16px;">　　乐观锁：顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，<span style="color: #ff0000;">但是在更新的时候会判断一下在此期间别人有没有去更新这个数据</span>，可以使用版本号等机制。<span style="color: #ff0000;">乐观锁适用于多读的应用类型</span>，这样可以提高吞吐量，像数据库提供的类似于write_condition机制，其实都是提供的乐观锁。在<span style="color: #ff0000;">Java中java.util.concurrent.atomic包下面的</span><span style="color: #ff0000;">原子变量类就是使用了乐观锁的一种实现方式CAS实现的</span>。</span></p>
-<p><span style="font-size: 16px;">&nbsp;</span></p>
-<p><strong><span style="font-size: 16px;">乐观锁的一种实现方式-CAS(Compare and Swap 比较并交换)：</span></strong></p>
-<p><span style="font-size: 16px;">　　锁存在的问题:</span></p>
-<p><span style="font-size: 16px;">　　　　<span style="color: #ff0000;">Java在JDK1.5之前都是靠 synchronized关键字保证同步的</span>，这种通过使用一致的锁定协议来协调对共享状态的访问，可以确保无论哪个线程持有共享变量的锁，都采用独占的方式来访问这些变量。这就是一种独占锁，独占锁其实就是一种悲观锁，所以可以说 <span style="color: #ff0000;"><strong>synchronized 是悲观锁。</strong></span></span></p>
-<p><span style="font-size: 16px;"><span style="color: #ff0000;"><strong>　　　　</strong><span>悲观锁机制存在以下问题：　　</span></span></span></p>
-<p><span style="font-size: 16px;"><span style="color: #ff0000;"><span>　　　　　　<span style="color: #000000;">1. 在多线程竞争下，加锁、释放锁会导致比较多的上下文切换和调度延时，引起性能问题。</span></span></span></span></p>
-<p><span style="font-size: 16px;"><span style="color: #ff0000;"><span>　　　　　　<span style="color: #000000;">2. 一个线程持有锁会导致其它所有需要此锁的线程挂起。</span></span></span></span></p>
-<p><span style="font-size: 16px;"><span style="color: #ff0000;"><span><span style="color: #000000;">　　　　　　3. 如果一个优先级高的线程等待一个优先级低的线程释放锁会导致优先级倒置，引起性能风险。</span></span></span></span></p>
-<p><span style="font-size: 16px; color: #000000;">　　　　对比于悲观锁的这些问题，另一个更加有效的锁就是乐观锁。其实乐观锁就是：每次不加锁而是假设没有并发冲突而去完成某项操作，如果因为并发冲突失败就重试，直到成功为止。</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　乐观锁：</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　　　乐观锁（ Optimistic Locking ）在上文已经说过了，其实就是一种思想。相对悲观锁而言，乐观锁假设认为数据一般情况下不会产生并发冲突，所以在数据进行提交更新的时候，才会正式对数据是否产生并发冲突进行检测，如果发现并发冲突了，则让返回用户错误的信息，让用户决定如何去做。</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　　　上面提到的乐观锁的概念中其实已经阐述了它的具体实现细节：主要就是两个步骤：<strong><span style="color: #ff0000;">冲突检测和数据更新</span>。</strong>其实现方式有一种比较典型的就是 Compare and Swap ( CAS )。</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　CAS：</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　　　<span style="color: #ff0000;">CAS是乐观锁技术，</span>当多个线程尝试使用CAS同时更新同一个变量时，只有其中一个线程能更新变量的值，而其它线程都失败，失败的线程并不会被挂起，而是被告知这次竞争中失败，并可以再次尝试。　　　</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　　　CAS 操作中包含三个操作数 —— 需要读写的内存位置（V）、进行比较的预期原值（A）和拟写入的新值(B)。如果内存位置V的值与预期原值A相匹配，那么处理器会自动将该位置值更新为新值B。否则处理器不做任何操作。无论哪种情况，它都会在 CAS 指令之前返回该位置的值。（在 CAS 的一些特殊情况下将仅返回 CAS 是否成功，而不提取当前值。）CAS 有效地说明了“ <span style="color: #ff0000;">我认为位置 V 应该包含值 A；如果包含该值，则将 B 放到这个位置；否则，不要更改该位置，只告诉我这个位置现在的值即可</span>。 ”这其实和乐观锁的冲突检查+数据更新的原理是一样的。</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　　　这里再强调一下，乐观锁是一种思想。CAS是这种思想的一种实现方式。</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　JAVA对CAS的支持：<br></span></p>
-<p><span style="font-size: 16px; color: #000000;">　　　　<span style="color: #ff0000;">在JDK1.5 中新增 java.util.concurrent (J.U.C)就是建立在CAS之上的</span>。相对于对于 synchronized 这种阻塞算法，<span style="color: #ff0000;">CAS是非阻塞算法的一种常见实现</span>。所以J.U.C在性能上有了很大的提升。</span></p>
-<p><span style="font-size: 16px; color: #000000;">　　　　以 java.util.concurrent 中的 AtomicInteger 为例，看一下在不使用锁的情况下是如何保证线程安全的。主要理解 getAndIncrement 方法，该方法的作用相当于 ++i 操作。</span></p>
-<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
-<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> AtomicInteger <span style="color: #0000ff;">extends</span> Number <span style="color: #0000ff;">implements</span><span style="color: #000000;"> java.io.Serializable {  
-</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">volatile</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> value; 
-</span><span style="color: #008080;"> 3</span> 
-<span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> get() {  
-</span><span style="color: #008080;"> 5</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> value;  
-</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">    }  
-</span><span style="color: #008080;"> 7</span> 
-<span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> getAndIncrement() {  
-</span><span style="color: #008080;"> 9</span>         <span style="color: #0000ff;">for</span><span style="color: #000000;"> (;;) {  
-</span><span style="color: #008080;">10</span>             <span style="color: #0000ff;">int</span> current =<span style="color: #000000;"> get();  
-</span><span style="color: #008080;">11</span>             <span style="color: #0000ff;">int</span> next = current + 1<span style="color: #000000;">;  
-</span><span style="color: #008080;">12</span>             <span style="color: #0000ff;">if</span><span style="color: #000000;"> (compareAndSet(current, next))  
-</span><span style="color: #008080;">13</span>                 <span style="color: #0000ff;">return</span><span style="color: #000000;"> current;  
-</span><span style="color: #008080;">14</span> <span style="color: #000000;">        }  
-</span><span style="color: #008080;">15</span> <span style="color: #000000;">    }  
-</span><span style="color: #008080;">16</span> 
-<span style="color: #008080;">17</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">boolean</span> compareAndSet(<span style="color: #0000ff;">int</span> expect, <span style="color: #0000ff;">int</span><span style="color: #000000;"> update) {  
-</span><span style="color: #008080;">18</span>         <span style="color: #0000ff;">return</span> unsafe.compareAndSwapInt(<span style="color: #0000ff;">this</span><span style="color: #000000;">, valueOffset, expect, update);  
-</span><span style="color: #008080;">19</span> <span style="color: #000000;">    }  
-</span><span style="color: #008080;">20</span> }</pre>
-<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
-<p>　　　　<span style="font-size: 16px;">在没有锁的机制下,字段value要借助<span style="color: #ff0000;">volatile</span>原语，保证线程间的数据是可见性。这样在获取变量的值的时候才能直接读取。然后来看看 ++i 是怎么做到的。</span></p>
-<p><span style="font-size: 16px;">　　　&nbsp; getAndIncrement 采用了CAS操作，每次从内存中读取数据然后将此数据和 +1 后的结果进行CAS操作，如果成功就返回结果，否则重试直到成功为止。</span></p>
-<p><span style="font-size: 16px;">　　　 &nbsp;而 compareAndSet 利用JNI（Java Native Interface）来完成CPU指令的操作：</span></p>
-<div class="cnblogs_code">
-<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">boolean</span> compareAndSet(<span style="color: #0000ff;">int</span> expect, <span style="color: #0000ff;">int</span><span style="color: #000000;"> update) {   
-</span><span style="color: #008080;">2</span>     <span style="color: #0000ff;">return</span> unsafe.compareAndSwapInt(<span style="color: #0000ff;">this</span><span style="color: #000000;">, valueOffset, expect, update);
-</span><span style="color: #008080;">3</span> }　　　</pre>
-</div>
-<p>　　　　<span style="font-size: 16px;">其中unsafe.compareAndSwapInt(this, valueOffset, expect, update);类似如下逻辑：</span></p>
-<div class="cnblogs_code">
-<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">this</span> ==<span style="color: #000000;"> expect) {
-</span><span style="color: #008080;">2</span>     <span style="color: #0000ff;">this</span> =<span style="color: #000000;"> update
-</span><span style="color: #008080;">3</span>     <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
-</span><span style="color: #008080;">4</span> } <span style="color: #0000ff;">else</span><span style="color: #000000;"> {
-</span><span style="color: #008080;">5</span>     <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
-</span><span style="color: #008080;">6</span> }</pre>
-</div>
-<p><span style="font-size: 16px;">　　　　那么比较this ==&nbsp;expect，替换this =&nbsp;update，compareAndSwapInt实现这两个步骤的原子性呢？ 参考CAS的原理</span></p>
-<p><span style="font-size: 16px;">　　CAS原理：<br></span></p>
-<p><span style="font-size: 16px;">　　　　CAS通过调用JNI的代码实现的。</span><span style="font-size: 16px;">而compareAndSwapInt就是借助C来调用CPU底层指令实现的。</span></p>
-<p>　　　　 &nbsp;<span style="font-size: 16px;">下面从分析比较常用的CPU（intel x86）来解释CAS的实现原理。</span></p>
-<p><span style="font-size: 16px;">&nbsp;　　　 &nbsp;下面是sun.misc.Unsafe类的compareAndSwapInt()方法的源代码：</span></p>
-<div class="cnblogs_code">
-<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">native</span> <span style="color: #0000ff;">boolean</span> compareAndSwapInt(Object o, <span style="color: #0000ff;">long</span><span style="color: #000000;"> offset,
-</span><span style="color: #008080;">2</span>                                               <span style="color: #0000ff;">int</span><span style="color: #000000;"> expected,
-</span><span style="color: #008080;">3</span>                                               <span style="color: #0000ff;">int</span> x);</pre>
-</div>
-<p>　　　　 <span style="font-size: 16px;">可以看到这是个本地方法调用。这个本地方法在JDK中依次调用的C++代码为：</span></p>
-<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
-<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">#define</span> LOCK_IF_MP(mp) __asm cmp mp, 0  \
-<span style="color: #008080;"> 2</span> <span style="color: #000000;">                       __asm je L0      \
-</span><span style="color: #008080;"> 3</span>                        __asm _emit <span style="color: #800080;">0xF0</span><span style="color: #000000;"> \
-</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">                       __asm L0:
-</span><span style="color: #008080;"> 5</span> 
-<span style="color: #008080;"> 6</span> inline jint     Atomic::cmpxchg    (jint     exchange_value, <span style="color: #0000ff;">volatile</span> jint*<span style="color: #000000;">     dest, jint     compare_value) {
-</span><span style="color: #008080;"> 7</span>   <span style="color: #008000;">//</span><span style="color: #008000;"> alternative for InterlockedCompareExchange</span>
-<span style="color: #008080;"> 8</span>   <span style="color: #0000ff;">int</span> mp =<span style="color: #000000;"> os::is_MP();
-</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">  __asm {
-</span><span style="color: #008080;">10</span> <span style="color: #000000;">    mov edx, dest
-</span><span style="color: #008080;">11</span> <span style="color: #000000;">    mov ecx, exchange_value
-</span><span style="color: #008080;">12</span> <span style="color: #000000;">    mov eax, compare_value
-</span><span style="color: #008080;">13</span> <span style="color: #000000;">    LOCK_IF_MP(mp)
-</span><span style="color: #008080;">14</span> <span style="color: #000000;">    cmpxchg dword ptr [edx], ecx
-</span><span style="color: #008080;">15</span> <span style="color: #000000;">  }
-</span><span style="color: #008080;">16</span> }</pre>
-<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
-<p>　　　　<span style="font-size: 16px;">如上面源代码所示，程序会根据当前处理器的类型来决定是否为cmpxchg指令添加lock前缀。如果程序是在多处理器上运行，就为cmpxchg指令加上lock前缀（lock cmpxchg）。反之，如果程序是在单处理器上运行，就省略lock前缀（单处理器自身会维护单处理器内的顺序一致性，不需要lock前缀提供的内存屏障效果）。</span></p>
-<p>&nbsp;</p>
-<p><span style="font-size: 16px;">　　<span style="font-size: 16px;">CAS</span>缺点：</span></p>
-<p><span style="font-size: 16px;">　　　　　1. <strong><span style="color: #ff0000;">ABA问题：</span></strong><br></span></p>
-<p><span style="font-size: 16px;">　　　　　　　比如说一个线程one从内存位置V中取出A，这时候另一个线程two也从内存中取出A，并且two进行了一些操作变成了B，然后two又将V位置的数据变成A，这时候线程one进行CAS操作发现内存中仍然是A，然后one操作成功。尽管线程one的CAS操作成功，但可能存在潜藏的问题。如下所示：<br></span></p>
-<p><span style="font-size: 16px;">　　　　　　　<img src="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319183935713-1224322401.png" alt width="109" height="124"></span></p>
-<p><span style="font-size: 16px;">　　　　　　　现有一个用单向链表实现的堆栈，栈顶为A，这时线程T1已经知道A.next为B，然后希望用CAS将栈顶替换为B：</span></p>
-<p>　　　　　　　　　　<span style="font-size: 16px;">head.compareAndSet(A,B);</span></p>
-<p>　　　　　　　　<span style="font-size: 16px;">在T1执行上面这条指令之前，线程T2介入，将A、B出栈，再pushD、C、A，此时堆栈结构如下图，而对象B此时处于游离状态：</span></p>
-<p><span style="font-size: 16px;">　　　　　　　<img src="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319184016838-1784274955.png" alt width="112" height="178"></span></p>
-<p><span style="font-size: 16px;">　　　　　　　此时轮到线程T1执行CAS操作，检测发现栈顶仍为A，所以CAS成功，栈顶变为B，但实际上B.next为null，所以此时的情况变为：</span></p>
-<p><span style="font-size: 16px;">　　　　　　　<img src="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319184054182-183582877.png" alt width="248" height="153"></span></p>
-<p><span style="font-size: 16px;">　　　　　　　其中堆栈中只有B一个元素，C和D组成的链表不再存在于堆栈中，平白无故就把C、D丢掉了。</span></p>
-<p><span style="font-size: 16px;">　　　　　　　</span><span style="font-size: 16px;">从Java1.5开始JDK的atomic包里提供了一个类AtomicStampedReference来解决ABA问题。这个类的compareAndSet方法作用是首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，则以原子方式将该引用和该标志的值设置为给定的更新值。</span></p>
-<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
-<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">boolean</span><span style="color: #000000;"> compareAndSet(
-</span><span style="color: #008080;">2</span>                V      expectedReference,<span style="color: #008000;">//</span><span style="color: #008000;">预期引用</span>
-<span style="color: #008080;">3</span> 
-<span style="color: #008080;">4</span>                V      newReference,<span style="color: #008000;">//</span><span style="color: #008000;">更新后的引用</span>
-<span style="color: #008080;">5</span> 
-<span style="color: #008080;">6</span>               <span style="color: #0000ff;">int</span>    expectedStamp, <span style="color: #008000;">//</span><span style="color: #008000;">预期标志</span>
-<span style="color: #008080;">7</span> 
-<span style="color: #008080;">8</span>               <span style="color: #0000ff;">int</span>    newStamp <span style="color: #008000;">//</span><span style="color: #008000;">更新后的标志</span>
-<span style="color: #008080;">9</span> ) </pre>
-<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
-<p>　　　　　　　　<span style="font-size: 16px;">实际应用代码：</span></p>
-<div class="cnblogs_code">
-<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> AtomicStampedReference&lt;Integer&gt; atomicStampedRef = <span style="color: #0000ff;">new</span> AtomicStampedReference&lt;Integer&gt;(100, 0<span style="color: #000000;">);
-</span><span style="color: #008080;">2</span> 
-<span style="color: #008080;">3</span> <span style="color: #000000;">........
-</span><span style="color: #008080;">4</span> 
-<span style="color: #008080;">5</span> atomicStampedRef.compareAndSet(100, 101, stamp, stamp + 1);</pre>
-</div>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;　　　<span style="font-size: 16px;">　2.&nbsp;<strong><span style="color: #ff0000;">循环时间长开销大：</span></strong></span></p>
-<p><span style="font-size: 16px;">　　　　　　<span style="color: #ff0000;">自旋CAS（不成功，就一直循环执行，直到成功）</span>如果长时间不成功，会给CPU带来非常大的执行开销。如果JVM能支持处理器提供的pause指令那么效率会有一定的提升，pause指令有两个作用，第一它可以延迟流水线执行指令（de-pipeline）,使CPU不会消耗过多的执行资源，延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零。第二它可以避免在退出循环的时候因内存顺序冲突（memory order violation）而引起CPU流水线被清空（CPU pipeline flush），从而提高CPU的执行效率。</span></p>
-<p><span style="font-size: 16px;">　　　　</span></p>
-<p><span style="font-size: 16px;">　　　　3.&nbsp;<span style="color: #ff0000;"><strong>只能保证一个共享变量的原子操作</strong>：</span></span></p>
-<p><span style="font-size: 16px;">　　　　　　当对一个共享变量执行操作时，我们可以使用循环CAS的方式来保证原子操作，但是对多个共享变量操作时，循环CAS就无法保证操作的原子性，这个时候就可以用锁，或者有一个取巧的办法，就是把多个共享变量合并成一个共享变量来操作。比如有两个共享变量i＝2,j=a，合并一下ij=2a，然后用CAS来操作ij。从<span style="color: #ff0000;">Java1.5开始JDK提供了<strong>AtomicReference</strong></span><strong><span style="color: #ff0000;">类来保证引用对象之间的原子性，你可以把多个变量放在一个对象里来进行CAS操作</span>。</strong></span></p>
-<p>&nbsp;</p>
-<p><span style="font-size: 16px;"><strong>　　</strong>CAS与Synchronized的使用情景：　　　</span></p>
-<p>　　　　<span style="font-size: 16px;">1、对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。</span></p>
-<p><span style="font-size: 16px;">　　　 2、对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</span></p>
-<p><span style="font-size: 16px;">　　　补充： synchronized在jdk1.6之后，已经改进优化。synchronized的底层实现主要依靠Lock-Free的队列，基本思路是自旋后阻塞，竞争切换后继续竞争锁，稍微牺牲了公平性，但获得了高吞吐量。在线程冲突较少的情况下，可以获得和CAS类似的性能；而线程冲突严重的情况下，性能远高于CAS。</span></p>
-<p>&nbsp;</p>
-<p><span style="font-size: 16px;">　　concurrent包的实现：<br></span></p>
-<p><span style="font-size: 16px;">　　　　由于java的CAS同时具有 volatile 读和volatile写的内存语义，因此Java线程之间的通信现在有了下面四种方式：</span></p>
-<p><span style="font-size: 16px;">　　　　　　1. A线程写volatile变量，随后B线程读这个volatile变量。</span></p>
-<p><span style="font-size: 16px;">　　　　　　2. A线程写volatile变量，随后B线程用CAS更新这个volatile变量。</span></p>
-<p><span style="font-size: 16px;">　　　　　　3.&nbsp;A线程用CAS更新一个volatile变量，随后B线程用CAS更新这个volatile变量。</span></p>
-<p><span style="font-size: 16px;">　　　　　　4.&nbsp;A线程用CAS更新一个volatile变量，随后B线程读这个volatile变量。</span></p>
-<p><span style="font-size: 16px;">　　　　Java的CAS会使用现代处理器上提供的高效机器级别原子指令，这些原子指令以原子方式对内存执行读-改-写操作，这是在多处理器中实现同步的关键（从本质上来说，能够支持原子性读-改-写指令的计算机器，是顺序计算图灵机的异步等价机器，因此任何现代的多处理器都会去支持某种能对内存执行原子性读-改-写操作的原子指令）。同时，volatile变量的读/写和CAS可以实现线程之间的通信。把这些特性整合在一起，就形成了整个concurrent包得以实现的基石。如果我们仔细分析concurrent包的源代码实现，会发现一个通用化的实现模式：</span></p>
-<p><span style="font-size: 16px;">　　　　　　1. 首先，声明共享变量为volatile；　　</span></p>
-<p><span style="font-size: 16px;">　　　　　　2.&nbsp;然后，使用CAS的原子条件更新来实现线程之间的同步；</span></p>
-<p><span style="font-size: 16px;">　　　　　　3.&nbsp;同时，配合以volatile的读/写和CAS所具有的volatile读和写的内存语义来实现线程之间的通信。</span></p>
-<p><span style="font-size: 16px;">　　　　AQS，非阻塞数据结构和原子变量类（java.util.concurrent.atomic包中的类），这些concurrent包中的基础类都是使用这种模式来实现的，而concurrent包中的高层类又是依赖于这些基础类来实现的。从整体来看，concurrent包的实现示意图如下：</span></p>
-<p><span style="font-size: 16px;">　　　　　　<img src="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319190237932-274252686.png" alt width="626" height="433"></span></p>
-<p>&nbsp;</p>
-<p>　　<span style="font-size: 16px;">JVM中的CAS（堆中对象的分配）：</span><span style="font-size: 16px;">　</span></p>
-<p>　　　　<span style="font-size: 16px;">Java调用<code>new object()</code>会创建一个对象，这个对象会被分配到JVM的堆中。那么这个对象到底是怎么在堆中保存的呢？</span></p>
-<p>　　　　<span style="font-size: 16px;">首先，<code>new object()</code>执行的时候，这个对象需要多大的空间，其实是已经确定的，因为java中的各种数据类型，占用多大的空间都是固定的（对其原理不清楚的请自行Google）。那么接下来的工作就是在堆中找出那么一块空间用于存放这个对象。 </span><br><span style="font-size: 16px;">
-　　　　在单线程的情况下，一般有两种分配策略：</span></p>
-<p><span style="font-size: 16px;">　　　　　　1.&nbsp;指针碰撞：这种一般适用于内存是绝对规整的（内存是否规整取决于内存回收策略），分配空间的工作只是将指针像空闲内存一侧移动对象大小的距离即可。</span></p>
-<p><span style="font-size: 16px;">　　　　　　2.&nbsp;空闲列表：这种适用于内存非规整的情况，这种情况下JVM会维护一个内存列表，记录哪些内存区域是空闲的，大小是多少。给对象分配空间的时候去空闲列表里查询到合适的区域然后进行分配即可。</span></p>
-<p><span style="font-size: 16px;">　　　　但是JVM不可能一直在单线程状态下运行，那样效率太差了。由于再给一个对象分配内存的时候不是原子性的操作，至少需要以下几步：查找空闲列表、分配内存、修改空闲列表等等，这是不安全的。解决并发时的安全问题也有两种策略：</span></p>
-<p><span style="font-size: 16px;">　　　　　　1. CAS：实际上虚拟机采用CAS配合上失败重试的方式保证更新操作的原子性，原理和上面讲的一样。</span></p>
-<p><span style="font-size: 16px;">　　　　　　2. TLAB：如果使用CAS其实对性能还是会有影响的，所以JVM又提出了一种更高级的优化策略：每个线程在Java堆中预先分配一小块内存，称为本地线程分配缓冲区（TLAB），线程内部需要分配内存时直接在TLAB上分配就行，避免了线程冲突。只有当缓冲区的内存用光需要重新分配内存的时候才会进行CAS操作分配更大的内存空间。 <br>
-　　　　　　虚拟机是否使用TLAB，可以通过<code>-XX:+/-UseTLAB</code>参数来进行配置（jdk5及以后的版本默认是启用TLAB的）。</span></p></div><div id="MySignature"></div>
-<div class="clear"></div>
-<div id="blog_post_info_block">
-<div id="EntryTag"></div>
-
-
-
-</div></div></div></div>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/25/java并发问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql中的悲观锁和乐观锁的应用场景和实现方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-mysql中的悲观锁和乐观锁的应用场景和实现方式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
@@ -471,6 +266,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -478,16 +294,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/25/mysql中的悲观锁和乐观锁的应用场景和实现方式/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/25/mysql中的悲观锁和乐观锁的应用场景和实现方式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/07/25/java并发问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/25/juc包相关类容/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -507,318 +391,14 @@
 
 
 
-
   
-    <article id="post-juc包相关类容" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: juc包相关类容<br>date: 2019-07-25 10:44:25<br>tags:</p>
-<div id="article_content" class="article_content clearfix" data-track-view="{&quot;mod&quot;:&quot;popu_307&quot;,&quot;con&quot;:&quot;,https://blog.csdn.net/qq_36807862/article/details/80944780,&quot;}" data-track-click="{&quot;mod&quot;:&quot;popu_307&quot;,&quot;con&quot;:&quot;,https://blog.csdn.net/qq_36807862/article/details/80944780&quot;}">
-                                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-3019150162.css">
-                                        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-3019150162.css">
-                <div class="htmledit_views" id="content_views">
-                                            <h1><a name="t0"></a>1.主要内容</h1><p></p>1. Java JUC 简介<br>2. volatile 关键字-内存可见性<br>3. 原子变量-CAS算法<br>4. ConcurrentHashMap 锁分段机制<br>5. CountDownLatch 闭锁<br>6. 实现 Callable 接口<br>7. Lock 同步锁<br>8. Condition 控制线程通信<br>9. 线程按序交替<br>10. ReadWriteLock 读写锁<br>11. 线程八锁<br>12. 线程池<br>13. 线程调度<br><p>14. ForkJoinPool 分支/合并框架 工作窃取</p><h1><a name="t1"></a>2.juc简介</h1><p></p><p>在 Java 5.0 提供了 java.util.concurrent （简称JUC ）包，在此包中增加了在并发编程中很常用的实用工具类，用于定义类似于线程的自定义子系统，包括线程池、异步 IO 和轻量级任务框架。提供可调的、灵活的线程池。还提供了设计用于多线程上下文中的 Collection 实现等。</p><h1><a name="t2"></a>3.volatile&nbsp; 关键字&nbsp; 内存 可见性</h1><h2><a name="t3"></a>内存可见性：</h2><p> 内存可见性（Memory Visibility）是指当某个线程正在使用对象状态而另一个线程在同时修改该状态，需要确保当一个线程修改了对象状态后，其他线程能够看到发生的状态变化。</p><p>&nbsp; &nbsp; 可见性错误是指当读操作与写操作在不同的线程中执行时，我们无法确保执行读操作的线程能适时地看到其他线程写入的值，有时甚至是根本不可能的事情。</p><p> 我们可以通过同步来保证对象被安全地发布。除此之外我们也可以使用一种更加轻量级的 volatile 变量。</p><h2><a name="t4"></a><strong>volatile&nbsp; 关键字：</strong></h2><p>&nbsp;Java 提供了一种稍弱的同步机制，即 volatile 变量，用来确保将变量的更新操作通知到其他线程。可以将 volatile 看做一个轻量级的锁，但是又与锁有些不同：&nbsp;对于多线程，不是一种互斥关系不能保证变量状态的“原子性操作”<br></p><h2><a name="t5"></a><strong>原子量 变量 CAS 算法：</strong></h2><p><strong>CAS&nbsp; 算法：</strong></p><p> CAS (Compare-And-Swap) 是一种硬件对并发的支持，针对多处理器操作而设计的处理器中的一种特殊指令，用于管理对共享数据的并发访问。CAS 是一种无锁的非阻塞算法的实现。</p><p>CAS 包含了 3 个操作数：</p> &nbsp;&nbsp;&nbsp;&nbsp;需要读写的内存值 V<br> &nbsp;&nbsp;&nbsp;&nbsp;进行比较的值 A<br> &nbsp;&nbsp;&nbsp;&nbsp;拟写入的新值 B<br><p>&nbsp;当且仅当 V 的值等于 A 时，CAS 通过原子方式用新值 B 来更新 V 的值，否则不会执行任何操作。</p><p><strong>原子变量：</strong><br></p><p> 类的小工具包，支持在单个变量上解除锁的线程安全编程。事实上，此包中的类可将 volatile 值、字段和数组元素的概念扩展到那些也提供原子条件更新操作的类。<br> 类 AtomicBoolean、AtomicInteger、AtomicLong 和 AtomicReference 的实例各自提供对相应类型单个变量的访问和更新。每个类也为该类型提供适当的实用工具方法。AtomicIntegerArray、AtomicLongArray 和 AtomicReferenceArray 类进一步扩展了原子操作，对这些类型的数组提供了支持。这些类在为其数组元素提供 volatile 访问语义方面也引人注目，这对于普通数组来说是不受支持的。核心方法：boolean compareAndSet(expectedValue, updateValue)<br> java.util.concurrent.atomic 包下提供了一些原子操作的常用类:<br> AtomicBoolean 、AtomicInteger 、AtomicLong 、 AtomicReference、AtomicIntegerArray 、AtomicLongArray<br></p><p> AtomicMarkableReference、AtomicReferenceArray、AtomicStampedReferenc</p><h1><a name="t6"></a>4.ConcurrentHashMap&nbsp; 锁分段 机制</h1><p> Java 5.0 在 java.util.concurrent 包中提供了多种并发容器类来改进同步容器<br>的性能。<br> ConcurrentHashMap 同步容器类是Java 5 增加的一个线程安全的哈希表。对与多线程的操作，介于 HashMap 与 Hashtable 之间。内部采用“锁分段”机制替代 Hashtable 的独占锁。进而提高性能。<br></p><p> 此包还提供了设计用于多线程上下文中的 Collection 实现：ConcurrentHashMap、ConcurrentSkipListMap、ConcurrentSkipListSet、CopyOnWriteArrayList 和 CopyOnWriteArraySet。当期望许多线程访问一个给定 collection 时，ConcurrentHashMap 通常优于同步的 HashMap，ConcurrentSkipListMap 通常优于同步的 TreeMap。当期望的读数和遍历远远大于列表的更新数时，CopyOnWriteArrayList 优于同步的 ArrayList。</p><h1><a name="t7"></a>5.CountDownLatch&nbsp; 闭锁</h1><div> Java 5.0 在 java.util.concurrent 包中提供了多种并发容器类来改进同步容器的性能。<br> CountDownLatch 一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。<br> 闭锁可以延迟线程的进度直到其到达终止状态，闭锁可以用来确保某些活动直到其他活动都完成才继续执行：<br>&nbsp; &nbsp;确保某个计算在其需要的所有资源都被初始化之后才继续执行;<br>&nbsp; &nbsp;确保某个服务在其依赖的所有其他服务都已经启动之后才启动;<br>&nbsp; &nbsp;等待直到某个操作所有参与者都准备就绪再继续执行。<br></div><h1><a name="t8"></a>6.实现 Callable&nbsp; 接口</h1><p>&nbsp;Java 5.0 在 java.util.concurrent 提供了一个新的创建执行线程的方式：Callable 接口<br></p><p>&nbsp;Callable 接口类似于 Runnable，两者都是为那些其实例可能被另一个线程执行的类设计的。但是 Runnable 不会返回结果，并且无法抛出经过检查的异常。Callable 需要依赖FutureTask ，FutureTask 也可以用作闭锁。</p><p><br></p><h1><a name="t9"></a>7.Lock&nbsp; 同步</h1><h2><a name="t10"></a>显示锁 Lock：</h2><p>在 Java 5.0 之前，协调共享对象的访问时可以使用的机制只有 synchronized 和 volatile 。Java 5.0 后增加了一些新的机制，但并不是一种替代内置锁的方法，而是当内置锁不适用时，作为一种可选择的高级功能。ReentrantLock 实现了 Lock 接口，并提供了与synchronized 相同的互斥性和内存可见性。但相较于synchronized 提供了更高的处理锁的灵活性。<br></p><h1><a name="t11"></a>8.Condition&nbsp; 控制线程通信</h1> Condition 接口描述了可能会与锁有关联的条件变量。这些变量在用法上与使用 Object.wait 访问的隐式监视器类似，但提供了更强大的功能。需要特别指出的是，单个 Lock 可能与多个 Condition 对象关联。为了避免兼容性问题，Condition 方法的名称与对应的 Object 版本中的不同。<br> 在 Condition 对象中，与 wait、notify 和 notifyAll 方法对应的分别是await、signal 和 signalAll。<br><p> Condition 实例实质上被绑定到一个锁上。要为特定 Lock 实例获得Condition 实例，请使用其 newCondition() 方法</p><h1><a name="t12"></a>9.ReadWriteLock 读 读 写锁</h1><div> ReadWriteLock 维护了一对相关的锁，一个用于只读操作，另一个用于写入操作。只要没有 writer，读取锁可以由多个 reader 线程同时保持。写入锁是独占的。。<br> ReadWriteLock 读取操作通常不会改变共享资源，但执行写入操作时，必须独占方式来获取锁。对于读取操作占多数的数据结构。 ReadWriteLock 能提供比独占锁更高的并发性。而对于只读的数据结构，其中包含的不变性可以完全不需要考虑加锁操作。<br></div><div><br></div><h1><a name="t13"></a>10.线程八锁</h1><div>• 一个对象里面如果有多个synchronized方法，某一个时刻内，只要一个线程去调用其中的一个synchronized方法了，其它的线程都只能等待，换句话说，某一个时刻内，只能有唯一一个线程去访问这些synchronized方法<br>• 锁的是当前对象this，被锁定后，其它的线程都不能进入到当前对象的其它的synchronized方法<br>• 加个普通方法后发现和同步锁无关<br>• 换成两个对象后，不是同一把锁了，情况立刻变化。<br>• 都换成静态同步方法后，情况又变化<br>• 所有的非静态同步方法用的都是同一把锁——实例对象本身，也就是说如果一个实例对象的非静态同步方法获取锁后，该实例对象的其他非静态同步方法必须等待获取锁的方法释放锁后才能获取锁，可是别的实例对象的非静态同步方法因为跟该实例对象的非静态同步方法用的是不同的锁，所以毋须等待该实例对象已获取锁的非静态同步方法释放锁就可以获取他们自己的锁。<br>• 所有的静态同步方法用的也是同一把锁——类对象本身，这两把锁是两个不同的对象，所以静态同步方法与非静态同步方法之间是不会有竞态条件的。但是一旦一个静态同步方法获取锁后，其他的静态同步方法都必须等待该方法释放锁后才能获取锁，而不管是同一个实例对象的静态同步方法之间，还是不同的实例对象的静态同步方法之间，只要它们同一个类的实例对象！<br></div><div><br></div><h1><a name="t14"></a>11.线程池</h1><div> 第四种获取线程的方法：线程池，一个 ExecutorService，它使用可能的几个池线程之一执行每个提交的任务，通常使用 Executors 工厂方法配置。线程池可以解决两个不同问题：由于减少了每个任务调用的开销，它们通常可以在执行大量异步任务时提供增强的性能，并且还可以提供绑定和管理资源（包括执行任务集时使用的线程）的方法。每个 ThreadPoolExecutor 还维护着一些基本的统计数据，如完成的任务数。<br> 为了便于跨大量上下文使用，此类提供了很多可调整的参数和扩展钩子 (hook)。但是，强烈建议程序员使用较为方便的 Executors 工厂方法 ：</div><div>&nbsp; &nbsp; Executors.newCachedThreadPool()（无界线程池，可以进行自动线程回收）<br> Executors.newFixedThreadPool(int)（固定大小线程池）<br> Executors.newSingleThreadExecutor()（单个后台线程）<br>它们均为大多数使用场景预定义了设置。<br></div><div><br></div><h1><a name="t15"></a>12.线程调度</h1><div>ScheduledExecutorService：<br></div><p>一个 ExecutorService，可安排在给定的延迟后运行或定期执行的命令。</p><h1><a name="t16"></a>13.ForkJoinPool&nbsp; 分支/ 合并框架&nbsp;ForkJoinPool&nbsp; 分支/ 合并框架&nbsp;</h1><div><img src="https://img-blog.csdn.net/20180706182044358?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2ODA3ODYy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt><br></div><h2><a name="t17"></a>Fork/Join&nbsp;框架与线程池的区别：</h2><div> 采用 “工作窃取”模式（work-stealing）：当执行新的任务时它可以将其拆分分成更小的任务执行，并将小任务加<br>到线程队列中，然后再从一个随机线程的队列中偷一个并把它放在自己的队<br>列中。<br> 相对于一般的线程池实现，fork/join框架的优势体现在对其中包含的任务的处理方式上.在一般的线程池中，如果一个线程正在执行的任务由于某些原因无法继续运行，那么该线程会处于等待状态。而在fork/join框架实现中，如果某个子问题由于等待另外一个子问题的完成而无法继续运行。那么处理该子问题的线程会主动寻找其他尚未运行的子问题来执行.这种方式减少了线程的等待时间，提高了性能。<br></div><div><br></div><div><br></div><div><br></div><p></p>                                    </div>
-                    </div>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/25/juc包相关类容/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-coder面试时需要注意的常用词汇的拼写" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: coder面试时需要注意的常用词汇的拼写<br>date: 2019-07-18 22:52:12<br>tags:<br>  <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile2.jpg" alt=" "></p>
-<p>  概述：<br>    下面总结了写简历必须注意得词汇拼写注意事项，以供必要时查询，当然这里列出的词汇可能有限，大家可以自行去总结<br>    下面是一些高频词汇的拼写以及常见的错误拼写举例</p>
-<p>  后端开发相关的词汇</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/1.png" alt=" "></p>
-<p> 前端开发：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/2.png" alt=" "></p>
-<p> 客户端相关：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/3.png" alt=" "></p>
-<p> 其他相关：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/4.png" alt=" "></p>
-<p> 最后有什么补充大家可以补充，这些细节一定得注意</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile.jpg" alt=" "></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/18/coder面试时需要注意的常用词汇的拼写/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mybatis-Plus真好用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: Mybatis-Pluss的真好用<br>date: 2019-07-18 01:13:50<br>tags:<br> 写在前面<br>  mybatis-plus<br>mybatis-plus这样一个框架，一种集mybatis与hibernate的优点一起的框架。它提供了hibernate的单表CRUD操作的方便同时，又保留了mybatis的特性。<br>先来看看官方怎么解释mybatis-plus的：<br>Mybatis-Plus（简称MP）是一个Mybatis的增强工具，在 Mybatis 的基础上只做增强不做改变，为简化开发、提高效率而生。<br> <img src="/2019/07/18/Mybatis-Plus真好用/1.png" alt=" "><br> mybatis-plus的愿景是成为Mybatis最好的搭档,就像Contra Game 中的1P、2P，基友搭配，效率翻倍。<br> <img src="/2019/07/18/Mybatis-Plus真好用/2.png" alt=" "><br>  带问题去学习这些东西<br> mybatis-plus怎么实现单表URUD操作？<br> mybatis-plus的底层实现原理是什么？<br> mybatis-plus与其他同类框架如mybatis helper有很什么优势？<br> 如何集成mybatis-plus快速搭建一个spring boot项目。<br>  MyBatis的增强方案确实有不少，我们已经中尝试了一下 MyBatis Generator。这次了解了一些先进的 Mybatis-Plus，SQL语句都不用写了，分页也是自动完成！<br>  1.数据库准备<br>  <img src="/2019/07/18/Mybatis-Plus真好用/database.png" alt=" "><br>  2.依赖准备<br>  <img src="/2019/07/18/Mybatis-Plus真好用/dependency.png" alt=" "><br>  3.项目配置<br>  <img src="/2019/07/18/Mybatis-Plus真好用/projectconfig.png" alt=" "><br>  4.新增一个mybatis-plus配置类<br>  <img src="/2019/07/18/Mybatis-Plus真好用/mpconfig.png" alt=" "><br>  哈哈几乎零配置，下面写一个简单的crud逻辑代码<br>  1.model类<br>  <img src="/2019/07/18/Mybatis-Plus真好用/entity.png" alt=" "><br>  2.Mapper类<br>  <img src="/2019/07/18/Mybatis-Plus真好用/mapper.png" alt=" "><br>  这里可以啥接口方法都不用写，就可以实现crud,我这里定义了一个查询方法<br>  3.service接口<br>  <img src="/2019/07/18/Mybatis-Plus真好用/service.png" alt=" "><br>  4.service实现<br>  <img src="/2019/07/18/Mybatis-Plus真好用/serviceimpl.png" alt=" "><br>  5.controller类<br>  <img src="/2019/07/18/Mybatis-Plus真好用/controller.png" alt=" "><br>  通过以上几个简单的步骤，我们就实现了user表的增删改查，传统 MyBatis的 XML文件一个都不需要写！<br>  接下来我们用postman简单的测试一下,先添加<br>  <img src="/2019/07/18/Mybatis-Plus真好用/addUser.png" alt=" "><br>  <img src="/2019/07/18/Mybatis-Plus真好用/add1.png" alt=" "><br>  再更改id=1的用户的年龄<br>  <img src="/2019/07/18/Mybatis-Plus真好用/updateUser.png" alt=" "><br>  <img src="/2019/07/18/Mybatis-Plus真好用/update1.png" alt=" "><br>  再删除id=1的用户<br>  <img src="/2019/07/18/Mybatis-Plus真好用/deleteUser.png" alt=" "><br>  再根据自定义方法查询用户<br>  <img src="/2019/07/18/Mybatis-Plus真好用/select1.png" alt=" "></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/18/Mybatis-Plus真好用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-my-first-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: my first blog<br>date: 2019-07-17 20:13:47<br>tags:</p>
-<h2 id="Arraylist和Linkedlist的区别"><a href="#Arraylist和Linkedlist的区别" class="headerlink" title="Arraylist和Linkedlist的区别"></a>Arraylist和Linkedlist的区别</h2><p> 1.首先我们从它们底层数据结构来分析</p>
-<pre><code>      （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的
-
-              Arraylist的实现原理是采用一个动态对象数组实现的，默认构造方法创建一个空数组
-
-
-
-
-
-     Vector的实现原理也是采用一个动态对象数组实现的，只不过它的默认构造方法创建一个大小为10的对象数组
-
-
-
-
-
-
-
-
-
-（2） Arraylist第一次添加元素时候，扩展容量为10，之后的扩充算法：原来数组大小+原来数组的一半（也就是1.5倍）</code></pre><p>应该可以很清楚的知道ArrayList底层扩容的原理了。而Vector和Arraylist的扩容机制类似，与Vector不同的是，Vector分两种情况如果增量为0的情况下每次扩容容量是翻倍，即为原来的2倍，而当增量&gt;0的时候，扩充为原来的大小加增量，而ArrayList是1.5倍。看似1.5倍增长的很慢，那经常增加大量元素会不会导致经常扩容，数组重新分配导致效率低下呢？其实不然，每次增长为原来的1.5倍实际增长的量会越来越大的<br>   （3）所以Arraylist和Vector不适合进行删除或插入操作</p>
-<pre><code>（4）为了防止数组动态扩充过多，建议创建ArrayList或者Vector时，给定初始容量。
-
-(5)Arraylist多线程中使用不安全，适合在单线程访问时使用，效率较高，而Vector线程安全，适合在多线程访问时使用，效率较低</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/17/my-first-blog/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/17/hello-world/">Hello World</a>
-    </h1>
   
 
-        
-        <a href="/2019/07/17/hello-world/" class="archive-article-date">
-  	<time datetime="2019-07-17T11:57:29.151Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/17/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  
 
   
+
   
 
 
@@ -841,8 +421,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -8,13 +8,28 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>我是个弟弟</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="title: java并发问题date: 2019-07-25 12:42:44tags:                            Java并发问题--乐观锁与悲观锁以及乐观锁的一种实现方式-CAS                                        首先介绍一些乐观锁与悲观锁: 　　悲观锁：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次">
+<meta property="og:type" content="article">
 <meta property="og:title" content="我是个弟弟">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/java并发问题/index.html">
 <meta property="og:site_name" content="我是个弟弟">
+<meta property="og:description" content="title: java并发问题date: 2019-07-25 12:42:44tags:                            Java并发问题--乐观锁与悲观锁以及乐观锁的一种实现方式-CAS                                        首先介绍一些乐观锁与悲观锁: 　　悲观锁：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319183935713-1224322401.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319184016838-1784274955.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319184054182-183582877.png">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319190237932-274252686.png">
+<meta property="og:updated_time" content="2019-07-25T04:43:20.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我是个弟弟">
+<meta name="twitter:description" content="title: java并发问题date: 2019-07-25 12:42:44tags:                            Java并发问题--乐观锁与悲观锁以及乐观锁的一种实现方式-CAS                                        首先介绍一些乐观锁与悲观锁: 　　悲观锁：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次">
+<meta name="twitter:image" content="http://common.cnblogs.com/images/copycode.gif">
   
     <link rel="alternative" href="/atom.xml" title="我是个弟弟" type="application/atom+xml">
   
@@ -150,9 +165,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-java并发问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-java并发问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
@@ -335,6 +348,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -342,16 +376,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/25/java并发问题/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/25/java并发问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/25/mysql中的悲观锁和乐观锁的应用场景和实现方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -371,454 +464,14 @@
 
 
 
-
   
-    <article id="post-mysql中的悲观锁和乐观锁的应用场景和实现方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: mysql中的悲观锁和乐观锁的应用场景和实现方式<br>date: 2019-07-25 11:46:10<br>tags:</p>
-<div id="topics">
-    <div class="post">
-        <h1 class="postTitle">
-            <a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/kyrieblog/p/11178577.html" target="_blank" rel="noopener">悲观锁和乐观锁的详细分析</a>
-        </h1>
-        <div class="clear"></div>
-        <div class="postBody">
-            <div id="cnblogs_post_body" class="blogpost-body"><p><strong>&nbsp; &nbsp;悲观锁：</strong></p>
-<p>&nbsp; &nbsp; &nbsp;顾名思义，悲观锁，正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。&nbsp; &nbsp; &nbsp; &nbsp;悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。</p>
-<p>&nbsp; &nbsp; &nbsp;<strong>使用场景举例：我们以mysql的存储引擎 InnoDB为例(如果不采用锁机制)</strong></p>
-<p><strong>&nbsp; &nbsp; &nbsp; &nbsp;</strong>商品表t_goods中有一个字段为status&nbsp; 为1表示该商品没有下单，为2表示该商品已经被下单了，那么我们对某商品下单之前一定确保该商品未被下单，也就是说该商品的status=1</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;我们对一个商品goods_id = 1 的下单实例</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;1.先查出该商品的信息</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;select status from t_goods where goods_id = 1</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;2,然后根据商品信息生成订单信息</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; insert into t_order(order_id,goods_id) values (null,1)</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;3.更新该商品的信息</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; update t_goods set status = 2 where goods_id = 1</p>
-<p>&nbsp; &nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; <strong>&nbsp;上面的情况在高并发的情况会出现什么问题呢？</strong></p>
-<p><strong>&nbsp; &nbsp; &nbsp; </strong>&nbsp;想一些在这种高并发情况下如果我们不采取任何的锁机制，是不是会出现我们在处理这个事务（就是在下这个订单的时候）别人是不是很可能已经下了这个商品的订单，status被修改为2了，可是我们完全不知情，继续下单，就可能会造成该商品被下单两次，所以这种是极其不安全的</p>
-<p>&nbsp; &nbsp; <strong>因此在上述情况中我们可以采用悲观锁</strong></p>
-<p><strong>&nbsp; &nbsp; &nbsp; &nbsp;</strong>在上面的情况中，商品被查询出来，有一个处理订单的过程，我们可以使用悲观锁机制，当我们查出这个goods信息后，就把当前的数据锁定起来，直到我们修改完毕再解锁，所以在我们处理该goods的时候，就避免了第三者来修改</p>
-<p><span style="color: #ff0000;"><strong>&nbsp; 注意：使用悲观锁之前我们得关闭mysql的自动提交功能，因为mysql是默认开启自动提交功能的</strong></span></p>
-<p><span style="color: #ff0000;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;set autocommit = 0；</strong></span></p>
-<p><strong>&nbsp; &nbsp; &nbsp;</strong>&nbsp;<span style="color: #000000;">下面来简单演示一下吧</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; 1.开启事务（三种方式都可以）</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;begin;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;begin work;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;start transaction;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;2.查询商品信息</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; select status from t_goods where goods_id = 1&nbsp;&nbsp;</span><span style="color: #ff0000;">for update</span><span style="color: #000000;">;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; 3.根据查询来的商品信息生成订单</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; insert into t_order(order_id,goods_id) values (null,1);</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; 4.修改该商品状态为2</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; update t_goods set status = 2 where goods_id = 1;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp;5.提交</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; commit;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;打开console1（明确指定主键，且查询有数据,采用Row-Level Lock ）</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png" alt width="328" height="261"></span></p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;打开console2 （如果console1长时间不commit,这里会报错）</p>
-<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210648493-302299321.png" alt width="491" height="163"></p>
-<p>&nbsp; &nbsp; &nbsp;与普通查询不一样的是，我们使用了select…for update的方式，这样就通过数据库实现了悲观锁。此时在t_goods表中，goods_id为1的 那条数据就被我们锁定了，其它的事务必须等本次事务提交之后才能执行。这样我们可以保证当前的数据不会被其它事务修改</p>
-<p>&nbsp; &nbsp;<span style="color: #ff0000;">注意：这里有个问题在是使用悲观锁的时候，如果第一个事务没有commit我们是不能进行该相同数据的写操作的，但是读操作分两种情况，在事务中，只有SELECT ... FOR UPDATE 或LOCK IN SHARE MODE 同一笔数据时会等待其它事务结束后才执行，一般SELECT ... 则不受此影响。</span>拿上面的实例来说，当我执行select status from t_goods where id=1 for update;后。我在另外的事务中如果再次执行select status from t_goods where id=1 for update;则第二个事务会一直等待第一个事务的提交，此时第二个查询处于阻塞的状态，但是如果我是在第二个事务中执行select status from t_goods where id=1;则能正常查询出数据，不会受第一个事务的影响。</p>
-<p><span style="color: #000000;">&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712211453153-2042737623.png" alt width="427" height="189"></span></p>
-<p>&nbsp;</p>
-<p>补充：MySQL select…for update的Row Lock与Table Lock</p>
-<p>上面我们提到，使用select…for update会把数据给锁住，不过我们需要注意一些锁的级别，MySQL InnoDB默认Row-Level Lock，所以只有「明确」地指定主键(id)，MySQL 才会执行Row lock (只锁住被选取的数据) ，否则MySQL 将会执行Table Lock (将整个数据表单给锁住)。</p>
-<p><span style="color: #ff0000;">如果明确有主键，没有数据，则没有lock</span></p>
-<p><span style="color: #ff0000;">&nbsp; &nbsp; <span style="color: #000000;">&nbsp;console1:没数据查询为空</span></span></p>
-<p><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712212827275-532282494.png" alt width="535" height="171"></span></p>
-<p>&nbsp; &nbsp;</p>
-<p>&nbsp;console2:查询结果为空，查询无阻塞，说明console1没有对数据执行锁定</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213042988-1503940553.png" alt width="398" height="99"></p>
-<p><span style="color: #ff0000;">如果没有主键，采用table lock;</span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;">&nbsp;console1:查询正常</span></span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213802765-1374589267.png" alt width="386" height="153"></span></span></p>
-<p>console2 :处于阻塞状态，如果console1长时间不提交，他就会报错，说明这里对全表进行了上锁</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712214316437-2069633589.png" alt width="510" height="86"></p>
-<p>&nbsp;<span style="color: #ff0000;">如果没有定义主键，采用table lock;</span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;">console1:正常查询</span></span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000920166-2060373838.png" alt width="344" height="101"></span></span></p>
-<p>&nbsp;</p>
-<p>console2:查询被阻塞，说明表被console1锁住了</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000654722-664730505.png" alt width="361" height="54"></p>
-<p>&nbsp;<span style="color: #ff0000;">以上就是关于数据库主键对MySQL锁级别的影响实例，需要注意的是，除了主键外，使用索引也会影响数据库的锁定级别</span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;">谈到了MySQL悲观锁，但是悲观锁并不是适用于任何场景，它也有它存在的一些不足，因为悲观锁大多数情况下依靠数据库的锁机制实现，以保证操作最大程度的独占性。如果加锁的时间过长，其他用户长时间无法访问，影响了程序的并发访问性，同时这样对数据库性能开销影响也很大，特别是对长事务而言，这样的开销往往无法承受。所以与悲观锁相对的，我们有了乐观锁，具体参见下面介绍</span></span></p>
-<p><strong><span style="color: #ff0000;"><span style="color: #000000;">乐观锁介绍：</span></span></strong></p>
-<p>&nbsp;</p>
-<p>&nbsp; &nbsp;乐观锁（ Optimistic Locking ） 相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。那么我们如何实现乐观锁呢，一般来说有以下2种方式：</p>
-<p>&nbsp;</p>
-<p>1.使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。用下面的一张图来说明：<img class="magplus" title="点击查看原始大小图片" src="http://dl.iteye.com/upload/picture/pic/125402/22a9518f-e355-315f-8d66-d91af4fda723.jpg" alt width="700" height="471"></p>
-<p>如上图所示，如果更新操作顺序执行，则数据的版本（version）依次递增，不会产生冲突。但是如果发生有不同的业务操作对同一版本的数据进行修改，那么，先提交的操作（图中B）会把数据version更新为2，当A在B之后提交更新时发现数据的version已经被修改了，那么A的更新操作会失败</p>
-<p>&nbsp;2.乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。</p>
-<p><strong>使用举例：以MySQL InnoDB为例</strong></p>
-<p>还是拿之前的实例来举：商品goods表中有一个字段status，status为1代表商品未被下单，status为2代表商品已经被下单，那么我们对某个商品下单时必须确保该商品status为1。假设商品的id为1</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713014150170-1752142532.png" alt width="688" height="268"></p>
-<p>&nbsp;</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013833245-27359745.png" alt width="723" height="453"></p>
-<p>输出结果如下：</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013926696-791455815.png" alt width="790" height="325"></p>
-<p>&nbsp;由上述可知我们同时查出同一个版本的数据，赋给不同的goods对象，然后先修改good1对象然后执行更新操作，执行成功。然后我们修改goods2，执行更新操作时提示操作失败</p>
-<p>这样我们就简单实现了一个乐观锁机制！</p></div><div id="MySignature"></div>
-<div class="clear"></div>
-<div id="blog_post_info_block">
-<div id="BlogPostCategory"></div>
-<div id="EntryTag"></div>
-</div></div></div></div>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/25/mysql中的悲观锁和乐观锁的应用场景和实现方式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-juc包相关类容" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: juc包相关类容<br>date: 2019-07-25 10:44:25<br>tags:</p>
-<div id="article_content" class="article_content clearfix" data-track-view="{&quot;mod&quot;:&quot;popu_307&quot;,&quot;con&quot;:&quot;,https://blog.csdn.net/qq_36807862/article/details/80944780,&quot;}" data-track-click="{&quot;mod&quot;:&quot;popu_307&quot;,&quot;con&quot;:&quot;,https://blog.csdn.net/qq_36807862/article/details/80944780&quot;}">
-                                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-3019150162.css">
-                                        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-3019150162.css">
-                <div class="htmledit_views" id="content_views">
-                                            <h1><a name="t0"></a>1.主要内容</h1><p></p>1. Java JUC 简介<br>2. volatile 关键字-内存可见性<br>3. 原子变量-CAS算法<br>4. ConcurrentHashMap 锁分段机制<br>5. CountDownLatch 闭锁<br>6. 实现 Callable 接口<br>7. Lock 同步锁<br>8. Condition 控制线程通信<br>9. 线程按序交替<br>10. ReadWriteLock 读写锁<br>11. 线程八锁<br>12. 线程池<br>13. 线程调度<br><p>14. ForkJoinPool 分支/合并框架 工作窃取</p><h1><a name="t1"></a>2.juc简介</h1><p></p><p>在 Java 5.0 提供了 java.util.concurrent （简称JUC ）包，在此包中增加了在并发编程中很常用的实用工具类，用于定义类似于线程的自定义子系统，包括线程池、异步 IO 和轻量级任务框架。提供可调的、灵活的线程池。还提供了设计用于多线程上下文中的 Collection 实现等。</p><h1><a name="t2"></a>3.volatile&nbsp; 关键字&nbsp; 内存 可见性</h1><h2><a name="t3"></a>内存可见性：</h2><p> 内存可见性（Memory Visibility）是指当某个线程正在使用对象状态而另一个线程在同时修改该状态，需要确保当一个线程修改了对象状态后，其他线程能够看到发生的状态变化。</p><p>&nbsp; &nbsp; 可见性错误是指当读操作与写操作在不同的线程中执行时，我们无法确保执行读操作的线程能适时地看到其他线程写入的值，有时甚至是根本不可能的事情。</p><p> 我们可以通过同步来保证对象被安全地发布。除此之外我们也可以使用一种更加轻量级的 volatile 变量。</p><h2><a name="t4"></a><strong>volatile&nbsp; 关键字：</strong></h2><p>&nbsp;Java 提供了一种稍弱的同步机制，即 volatile 变量，用来确保将变量的更新操作通知到其他线程。可以将 volatile 看做一个轻量级的锁，但是又与锁有些不同：&nbsp;对于多线程，不是一种互斥关系不能保证变量状态的“原子性操作”<br></p><h2><a name="t5"></a><strong>原子量 变量 CAS 算法：</strong></h2><p><strong>CAS&nbsp; 算法：</strong></p><p> CAS (Compare-And-Swap) 是一种硬件对并发的支持，针对多处理器操作而设计的处理器中的一种特殊指令，用于管理对共享数据的并发访问。CAS 是一种无锁的非阻塞算法的实现。</p><p>CAS 包含了 3 个操作数：</p> &nbsp;&nbsp;&nbsp;&nbsp;需要读写的内存值 V<br> &nbsp;&nbsp;&nbsp;&nbsp;进行比较的值 A<br> &nbsp;&nbsp;&nbsp;&nbsp;拟写入的新值 B<br><p>&nbsp;当且仅当 V 的值等于 A 时，CAS 通过原子方式用新值 B 来更新 V 的值，否则不会执行任何操作。</p><p><strong>原子变量：</strong><br></p><p> 类的小工具包，支持在单个变量上解除锁的线程安全编程。事实上，此包中的类可将 volatile 值、字段和数组元素的概念扩展到那些也提供原子条件更新操作的类。<br> 类 AtomicBoolean、AtomicInteger、AtomicLong 和 AtomicReference 的实例各自提供对相应类型单个变量的访问和更新。每个类也为该类型提供适当的实用工具方法。AtomicIntegerArray、AtomicLongArray 和 AtomicReferenceArray 类进一步扩展了原子操作，对这些类型的数组提供了支持。这些类在为其数组元素提供 volatile 访问语义方面也引人注目，这对于普通数组来说是不受支持的。核心方法：boolean compareAndSet(expectedValue, updateValue)<br> java.util.concurrent.atomic 包下提供了一些原子操作的常用类:<br> AtomicBoolean 、AtomicInteger 、AtomicLong 、 AtomicReference、AtomicIntegerArray 、AtomicLongArray<br></p><p> AtomicMarkableReference、AtomicReferenceArray、AtomicStampedReferenc</p><h1><a name="t6"></a>4.ConcurrentHashMap&nbsp; 锁分段 机制</h1><p> Java 5.0 在 java.util.concurrent 包中提供了多种并发容器类来改进同步容器<br>的性能。<br> ConcurrentHashMap 同步容器类是Java 5 增加的一个线程安全的哈希表。对与多线程的操作，介于 HashMap 与 Hashtable 之间。内部采用“锁分段”机制替代 Hashtable 的独占锁。进而提高性能。<br></p><p> 此包还提供了设计用于多线程上下文中的 Collection 实现：ConcurrentHashMap、ConcurrentSkipListMap、ConcurrentSkipListSet、CopyOnWriteArrayList 和 CopyOnWriteArraySet。当期望许多线程访问一个给定 collection 时，ConcurrentHashMap 通常优于同步的 HashMap，ConcurrentSkipListMap 通常优于同步的 TreeMap。当期望的读数和遍历远远大于列表的更新数时，CopyOnWriteArrayList 优于同步的 ArrayList。</p><h1><a name="t7"></a>5.CountDownLatch&nbsp; 闭锁</h1><div> Java 5.0 在 java.util.concurrent 包中提供了多种并发容器类来改进同步容器的性能。<br> CountDownLatch 一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。<br> 闭锁可以延迟线程的进度直到其到达终止状态，闭锁可以用来确保某些活动直到其他活动都完成才继续执行：<br>&nbsp; &nbsp;确保某个计算在其需要的所有资源都被初始化之后才继续执行;<br>&nbsp; &nbsp;确保某个服务在其依赖的所有其他服务都已经启动之后才启动;<br>&nbsp; &nbsp;等待直到某个操作所有参与者都准备就绪再继续执行。<br></div><h1><a name="t8"></a>6.实现 Callable&nbsp; 接口</h1><p>&nbsp;Java 5.0 在 java.util.concurrent 提供了一个新的创建执行线程的方式：Callable 接口<br></p><p>&nbsp;Callable 接口类似于 Runnable，两者都是为那些其实例可能被另一个线程执行的类设计的。但是 Runnable 不会返回结果，并且无法抛出经过检查的异常。Callable 需要依赖FutureTask ，FutureTask 也可以用作闭锁。</p><p><br></p><h1><a name="t9"></a>7.Lock&nbsp; 同步</h1><h2><a name="t10"></a>显示锁 Lock：</h2><p>在 Java 5.0 之前，协调共享对象的访问时可以使用的机制只有 synchronized 和 volatile 。Java 5.0 后增加了一些新的机制，但并不是一种替代内置锁的方法，而是当内置锁不适用时，作为一种可选择的高级功能。ReentrantLock 实现了 Lock 接口，并提供了与synchronized 相同的互斥性和内存可见性。但相较于synchronized 提供了更高的处理锁的灵活性。<br></p><h1><a name="t11"></a>8.Condition&nbsp; 控制线程通信</h1> Condition 接口描述了可能会与锁有关联的条件变量。这些变量在用法上与使用 Object.wait 访问的隐式监视器类似，但提供了更强大的功能。需要特别指出的是，单个 Lock 可能与多个 Condition 对象关联。为了避免兼容性问题，Condition 方法的名称与对应的 Object 版本中的不同。<br> 在 Condition 对象中，与 wait、notify 和 notifyAll 方法对应的分别是await、signal 和 signalAll。<br><p> Condition 实例实质上被绑定到一个锁上。要为特定 Lock 实例获得Condition 实例，请使用其 newCondition() 方法</p><h1><a name="t12"></a>9.ReadWriteLock 读 读 写锁</h1><div> ReadWriteLock 维护了一对相关的锁，一个用于只读操作，另一个用于写入操作。只要没有 writer，读取锁可以由多个 reader 线程同时保持。写入锁是独占的。。<br> ReadWriteLock 读取操作通常不会改变共享资源，但执行写入操作时，必须独占方式来获取锁。对于读取操作占多数的数据结构。 ReadWriteLock 能提供比独占锁更高的并发性。而对于只读的数据结构，其中包含的不变性可以完全不需要考虑加锁操作。<br></div><div><br></div><h1><a name="t13"></a>10.线程八锁</h1><div>• 一个对象里面如果有多个synchronized方法，某一个时刻内，只要一个线程去调用其中的一个synchronized方法了，其它的线程都只能等待，换句话说，某一个时刻内，只能有唯一一个线程去访问这些synchronized方法<br>• 锁的是当前对象this，被锁定后，其它的线程都不能进入到当前对象的其它的synchronized方法<br>• 加个普通方法后发现和同步锁无关<br>• 换成两个对象后，不是同一把锁了，情况立刻变化。<br>• 都换成静态同步方法后，情况又变化<br>• 所有的非静态同步方法用的都是同一把锁——实例对象本身，也就是说如果一个实例对象的非静态同步方法获取锁后，该实例对象的其他非静态同步方法必须等待获取锁的方法释放锁后才能获取锁，可是别的实例对象的非静态同步方法因为跟该实例对象的非静态同步方法用的是不同的锁，所以毋须等待该实例对象已获取锁的非静态同步方法释放锁就可以获取他们自己的锁。<br>• 所有的静态同步方法用的也是同一把锁——类对象本身，这两把锁是两个不同的对象，所以静态同步方法与非静态同步方法之间是不会有竞态条件的。但是一旦一个静态同步方法获取锁后，其他的静态同步方法都必须等待该方法释放锁后才能获取锁，而不管是同一个实例对象的静态同步方法之间，还是不同的实例对象的静态同步方法之间，只要它们同一个类的实例对象！<br></div><div><br></div><h1><a name="t14"></a>11.线程池</h1><div> 第四种获取线程的方法：线程池，一个 ExecutorService，它使用可能的几个池线程之一执行每个提交的任务，通常使用 Executors 工厂方法配置。线程池可以解决两个不同问题：由于减少了每个任务调用的开销，它们通常可以在执行大量异步任务时提供增强的性能，并且还可以提供绑定和管理资源（包括执行任务集时使用的线程）的方法。每个 ThreadPoolExecutor 还维护着一些基本的统计数据，如完成的任务数。<br> 为了便于跨大量上下文使用，此类提供了很多可调整的参数和扩展钩子 (hook)。但是，强烈建议程序员使用较为方便的 Executors 工厂方法 ：</div><div>&nbsp; &nbsp; Executors.newCachedThreadPool()（无界线程池，可以进行自动线程回收）<br> Executors.newFixedThreadPool(int)（固定大小线程池）<br> Executors.newSingleThreadExecutor()（单个后台线程）<br>它们均为大多数使用场景预定义了设置。<br></div><div><br></div><h1><a name="t15"></a>12.线程调度</h1><div>ScheduledExecutorService：<br></div><p>一个 ExecutorService，可安排在给定的延迟后运行或定期执行的命令。</p><h1><a name="t16"></a>13.ForkJoinPool&nbsp; 分支/ 合并框架&nbsp;ForkJoinPool&nbsp; 分支/ 合并框架&nbsp;</h1><div><img src="https://img-blog.csdn.net/20180706182044358?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2ODA3ODYy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt><br></div><h2><a name="t17"></a>Fork/Join&nbsp;框架与线程池的区别：</h2><div> 采用 “工作窃取”模式（work-stealing）：当执行新的任务时它可以将其拆分分成更小的任务执行，并将小任务加<br>到线程队列中，然后再从一个随机线程的队列中偷一个并把它放在自己的队<br>列中。<br> 相对于一般的线程池实现，fork/join框架的优势体现在对其中包含的任务的处理方式上.在一般的线程池中，如果一个线程正在执行的任务由于某些原因无法继续运行，那么该线程会处于等待状态。而在fork/join框架实现中，如果某个子问题由于等待另外一个子问题的完成而无法继续运行。那么处理该子问题的线程会主动寻找其他尚未运行的子问题来执行.这种方式减少了线程的等待时间，提高了性能。<br></div><div><br></div><div><br></div><div><br></div><p></p>                                    </div>
-                    </div>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/25/juc包相关类容/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-coder面试时需要注意的常用词汇的拼写" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: coder面试时需要注意的常用词汇的拼写<br>date: 2019-07-18 22:52:12<br>tags:<br>  <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile2.jpg" alt=" "></p>
-<p>  概述：<br>    下面总结了写简历必须注意得词汇拼写注意事项，以供必要时查询，当然这里列出的词汇可能有限，大家可以自行去总结<br>    下面是一些高频词汇的拼写以及常见的错误拼写举例</p>
-<p>  后端开发相关的词汇</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/1.png" alt=" "></p>
-<p> 前端开发：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/2.png" alt=" "></p>
-<p> 客户端相关：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/3.png" alt=" "></p>
-<p> 其他相关：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/4.png" alt=" "></p>
-<p> 最后有什么补充大家可以补充，这些细节一定得注意</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile.jpg" alt=" "></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/18/coder面试时需要注意的常用词汇的拼写/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mybatis-Plus真好用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: Mybatis-Pluss的真好用<br>date: 2019-07-18 01:13:50<br>tags:<br> 写在前面<br>  mybatis-plus<br>mybatis-plus这样一个框架，一种集mybatis与hibernate的优点一起的框架。它提供了hibernate的单表CRUD操作的方便同时，又保留了mybatis的特性。<br>先来看看官方怎么解释mybatis-plus的：<br>Mybatis-Plus（简称MP）是一个Mybatis的增强工具，在 Mybatis 的基础上只做增强不做改变，为简化开发、提高效率而生。<br> <img src="/2019/07/18/Mybatis-Plus真好用/1.png" alt=" "><br> mybatis-plus的愿景是成为Mybatis最好的搭档,就像Contra Game 中的1P、2P，基友搭配，效率翻倍。<br> <img src="/2019/07/18/Mybatis-Plus真好用/2.png" alt=" "><br>  带问题去学习这些东西<br> mybatis-plus怎么实现单表URUD操作？<br> mybatis-plus的底层实现原理是什么？<br> mybatis-plus与其他同类框架如mybatis helper有很什么优势？<br> 如何集成mybatis-plus快速搭建一个spring boot项目。<br>  MyBatis的增强方案确实有不少，我们已经中尝试了一下 MyBatis Generator。这次了解了一些先进的 Mybatis-Plus，SQL语句都不用写了，分页也是自动完成！<br>  1.数据库准备<br>  <img src="/2019/07/18/Mybatis-Plus真好用/database.png" alt=" "><br>  2.依赖准备<br>  <img src="/2019/07/18/Mybatis-Plus真好用/dependency.png" alt=" "><br>  3.项目配置<br>  <img src="/2019/07/18/Mybatis-Plus真好用/projectconfig.png" alt=" "><br>  4.新增一个mybatis-plus配置类<br>  <img src="/2019/07/18/Mybatis-Plus真好用/mpconfig.png" alt=" "><br>  哈哈几乎零配置，下面写一个简单的crud逻辑代码<br>  1.model类<br>  <img src="/2019/07/18/Mybatis-Plus真好用/entity.png" alt=" "><br>  2.Mapper类<br>  <img src="/2019/07/18/Mybatis-Plus真好用/mapper.png" alt=" "><br>  这里可以啥接口方法都不用写，就可以实现crud,我这里定义了一个查询方法<br>  3.service接口<br>  <img src="/2019/07/18/Mybatis-Plus真好用/service.png" alt=" "><br>  4.service实现<br>  <img src="/2019/07/18/Mybatis-Plus真好用/serviceimpl.png" alt=" "><br>  5.controller类<br>  <img src="/2019/07/18/Mybatis-Plus真好用/controller.png" alt=" "><br>  通过以上几个简单的步骤，我们就实现了user表的增删改查，传统 MyBatis的 XML文件一个都不需要写！<br>  接下来我们用postman简单的测试一下,先添加<br>  <img src="/2019/07/18/Mybatis-Plus真好用/addUser.png" alt=" "><br>  <img src="/2019/07/18/Mybatis-Plus真好用/add1.png" alt=" "><br>  再更改id=1的用户的年龄<br>  <img src="/2019/07/18/Mybatis-Plus真好用/updateUser.png" alt=" "><br>  <img src="/2019/07/18/Mybatis-Plus真好用/update1.png" alt=" "><br>  再删除id=1的用户<br>  <img src="/2019/07/18/Mybatis-Plus真好用/deleteUser.png" alt=" "><br>  再根据自定义方法查询用户<br>  <img src="/2019/07/18/Mybatis-Plus真好用/select1.png" alt=" "></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/18/Mybatis-Plus真好用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-my-first-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: my first blog<br>date: 2019-07-17 20:13:47<br>tags:</p>
-<h2 id="Arraylist和Linkedlist的区别"><a href="#Arraylist和Linkedlist的区别" class="headerlink" title="Arraylist和Linkedlist的区别"></a>Arraylist和Linkedlist的区别</h2><p> 1.首先我们从它们底层数据结构来分析</p>
-<pre><code>      （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的
-
-              Arraylist的实现原理是采用一个动态对象数组实现的，默认构造方法创建一个空数组
-
-
-
-
-
-     Vector的实现原理也是采用一个动态对象数组实现的，只不过它的默认构造方法创建一个大小为10的对象数组
-
-
-
-
-
-
-
-
-
-（2） Arraylist第一次添加元素时候，扩展容量为10，之后的扩充算法：原来数组大小+原来数组的一半（也就是1.5倍）</code></pre><p>应该可以很清楚的知道ArrayList底层扩容的原理了。而Vector和Arraylist的扩容机制类似，与Vector不同的是，Vector分两种情况如果增量为0的情况下每次扩容容量是翻倍，即为原来的2倍，而当增量&gt;0的时候，扩充为原来的大小加增量，而ArrayList是1.5倍。看似1.5倍增长的很慢，那经常增加大量元素会不会导致经常扩容，数组重新分配导致效率低下呢？其实不然，每次增长为原来的1.5倍实际增长的量会越来越大的<br>   （3）所以Arraylist和Vector不适合进行删除或插入操作</p>
-<pre><code>（4）为了防止数组动态扩充过多，建议创建ArrayList或者Vector时，给定初始容量。
-
-(5)Arraylist多线程中使用不安全，适合在单线程访问时使用，效率较高，而Vector线程安全，适合在多线程访问时使用，效率较低</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/17/my-first-blog/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/17/hello-world/">Hello World</a>
-    </h1>
   
 
-        
-        <a href="/2019/07/17/hello-world/" class="archive-article-date">
-  	<time datetime="2019-07-17T11:57:29.151Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/17/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  
 
   
+
   
 
 
@@ -841,8 +494,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
