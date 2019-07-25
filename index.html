@@ -152,6 +152,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Arraylist的源码分析以及与vector的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: Arraylist的源码分析以及与vector的区别<br>date: 2019-07-25 14:34:39<br>tags:</p>
+<div id="topics">
+    <div class="post">
+        <h1 class="postTitle">
+            <a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/kyrieblog/p/11128882.html" target="_blank" rel="noopener">Arraylist 和 Vector 和Linkedlist的区别</a>
+        </h1>
+        <div class="clear"></div>
+        <div class="postBody">
+            <div id="cnblogs_post_body" class="blogpost-body"><p>&nbsp; &nbsp; &nbsp;1.首先我们从它们底层数据结构来分析</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Arraylist的实现原理是采用一个动态对象数组实现的，默认构造方法创建一个空数组</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703195940337-485492671.png" alt width="557" height="190"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200205200-847451767.png" alt width="539" height="203"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Vector的实现原理也是采用一个动态对象数组实现的，只不过它的默认构造方法创建一个大小为10的对象数组</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200726866-1048040784.png" alt width="437" height="170"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200955514-1538749283.png" alt width="505" height="128"></p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703201257550-908515070.png" alt width="502" height="182"></p>
+<p>&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703201433001-776782554.png" alt width="484" height="81"></p>
+<p>&nbsp; &nbsp; （2） Arraylist第一次添加元素时候，扩展容量为10，之后的扩充算法：原来数组大小+原来数组的一半（也就是1.5倍）</p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703225016755-361884735.png" alt width="531" height="116"></p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703225409241-1902781159.png" alt width="534" height="185"></p>
+<p>&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703230233869-45979764.png" alt width="530" height="186"></p>
+<p>&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703230846513-1294761349.png" alt width="525" height="239"></p>
+<p>&nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703232505286-1276968953.png" alt width="548" height="208">&nbsp;</p>
+<p>应该可以很清楚的知道ArrayList底层扩容的原理了。而Vector和Arraylist的扩容机制类似，与Vector不同的是，Vector分两种情况如果增量为0的情况下每次扩容容量是翻倍，即为原来的2倍，而当增量&gt;0的时候，扩充为原来的大小加增量，而ArrayList是1.5倍。看似1.5倍增长的很慢，那经常增加大量元素会不会导致经常扩容，数组重新分配导致效率低下呢？其实不然，每次增长为原来的1.5倍实际增长的量会越来越大的<br>&nbsp; &nbsp;（3）所以Arraylist和Vector不适合进行删除或插入操作</p>
+<p>&nbsp; &nbsp; （4）为了防止数组动态扩充过多，建议创建ArrayList或者Vector时，给定初始容量。</p>
+<p>&nbsp; &nbsp; (5)Arraylist多线程中使用不安全，适合在单线程访问时使用，效率较高，而Vector线程安全，适合在多线程访问时使用，效率较低</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+
+</div></div></div></div>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/25/Arraylist的源码分析以及与vector的区别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java并发问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
