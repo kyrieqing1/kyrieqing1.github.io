@@ -8,24 +8,29 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>我是个弟弟</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: coder面试时需要注意的常用词汇的拼写date: 2019-07-18 22:52:12tags:     概述：    下面总结了写简历必须注意得词汇拼写注意事项，以供必要时查询，当然这里列出的词汇可能有限，大家可以自行去总结    下面是一些高频词汇的拼写以及常见的错误拼写举例   后端开发相关的词汇    前端开发：    客户端相关：    其他相关：    最后有什么补">
+  <meta name="description" content="title: Arraylist的源码分析以及与vector的区别date: 2019-07-25 14:34:39tags:                            Arraylist 和 Vector 和Linkedlist的区别">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我是个弟弟">
-<meta property="og:url" content="http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/Arraylist的源码分析以及与vector的区别/index.html">
 <meta property="og:site_name" content="我是个弟弟">
-<meta property="og:description" content="title: coder面试时需要注意的常用词汇的拼写date: 2019-07-18 22:52:12tags:     概述：    下面总结了写简历必须注意得词汇拼写注意事项，以供必要时查询，当然这里列出的词汇可能有限，大家可以自行去总结    下面是一些高频词汇的拼写以及常见的错误拼写举例   后端开发相关的词汇    前端开发：    客户端相关：    其他相关：    最后有什么补">
+<meta property="og:description" content="title: Arraylist的源码分析以及与vector的区别date: 2019-07-25 14:34:39tags:                            Arraylist 和 Vector 和Linkedlist的区别">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile2.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/1.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/2.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/3.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/4.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile.jpg">
-<meta property="og:updated_time" content="2019-07-18T15:17:17.296Z">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703195940337-485492671.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200205200-847451767.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200726866-1048040784.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200955514-1538749283.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703201257550-908515070.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703201433001-776782554.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703225016755-361884735.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703225409241-1902781159.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703230233869-45979764.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703230846513-1294761349.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703232505286-1276968953.png">
+<meta property="og:updated_time" content="2019-07-28T08:39:34.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我是个弟弟">
-<meta name="twitter:description" content="title: coder面试时需要注意的常用词汇的拼写date: 2019-07-18 22:52:12tags:     概述：    下面总结了写简历必须注意得词汇拼写注意事项，以供必要时查询，当然这里列出的词汇可能有限，大家可以自行去总结    下面是一些高频词汇的拼写以及常见的错误拼写举例   后端开发相关的词汇    前端开发：    客户端相关：    其他相关：    最后有什么补">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile2.jpg">
+<meta name="twitter:description" content="title: Arraylist的源码分析以及与vector的区别date: 2019-07-25 14:34:39tags:                            Arraylist 和 Vector 和Linkedlist的区别">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703195940337-485492671.png">
   
     <link rel="alternative" href="/atom.xml" title="我是个弟弟" type="application/atom+xml">
   
@@ -161,25 +166,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-coder面试时需要注意的常用词汇的拼写" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Arraylist的源码分析以及与vector的区别" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: coder面试时需要注意的常用词汇的拼写<br>date: 2019-07-18 22:52:12<br>tags:<br>  <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile2.jpg" alt=" "></p>
-<p>  概述：<br>    下面总结了写简历必须注意得词汇拼写注意事项，以供必要时查询，当然这里列出的词汇可能有限，大家可以自行去总结<br>    下面是一些高频词汇的拼写以及常见的错误拼写举例</p>
-<p>  后端开发相关的词汇</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/1.png" alt=" "></p>
-<p> 前端开发：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/2.png" alt=" "></p>
-<p> 客户端相关：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/3.png" alt=" "></p>
-<p> 其他相关：</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/4.png" alt=" "></p>
-<p> 最后有什么补充大家可以补充，这些细节一定得注意</p>
-<p> <img src="/2019/07/18/coder面试时需要注意的常用词汇的拼写/profile.jpg" alt=" "></p>
-
+<p>title: Arraylist的源码分析以及与vector的区别<br>date: 2019-07-25 14:34:39<br>tags:</p>
+<div id="topics">
+    <div class="post">
+        <h1 class="postTitle">
+            <a id="cb_post_title_url" class="postTitle2" href="\2019\07\28\Arraylist的源码分析以及与vector的区别\index.html">Arraylist 和 Vector 和Linkedlist的区别</a>
+        </h1>
+        <a id="more"></a>
+                <div class="clear"></div>
+                <div class="postBody">
+                        <div id="cnblogs_post_body" class="blogpost-body"><p>&nbsp; &nbsp; &nbsp;1.首先我们从它们底层数据结构
+来分析</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这>个两个还是有一点点区别的</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Arraylist的实现原理是采用一个动态对象数组实现的，默认构造方
+法创建一个空数组</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703195940337-485492671.png" alt width="557" height="190"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200205200-847451767.png" alt width="539" height="203"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Vector的实现原理也是采用一个动态对象数组实现的，只不过它的默认构造方法创建一个大小为10的
+对象数组</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200726866-1048040784.png" alt width="437" height="170"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703200955514-1538749283.png" alt width="505" height="128"></p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703201257550-908515070.png" alt width="502" height="182"></p>
+<p>&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703201433001-776782554.png" alt width="484" height="81"></p>
+<p>&nbsp; &nbsp; （2） Arraylist第一次添加元素时候，扩展容量为10，之后的扩充算法：原来数组大小+原来数组的一半（也就是1.5倍）</p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703225016755-361884735.png" alt width="531" height="116"></p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703225409241-1902781159.png" alt width="534" height="185"></p>
+<p>&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703230233869-45979764.png" alt width="530" height="186"></p>
+<p>&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703230846513-1294761349.png" alt width="525" height="239"></p>
+<p>&nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190703232505286-1276968953.png" alt width="548" height="208">&nbsp;</p>
+<p>应该可以很清楚的知道ArrayList底层扩容的原理了。而Vector和Arraylist的扩容机制类似，与Vector不同的是，Vector分两种情况如果增
+量为0的情况下每次扩容容量是翻倍，即为原来的2倍，而当增量&gt;0的时候，扩充为原来的大小加增量，而ArrayList是1.5倍。看似1.5倍增>长的很慢，那经常增加大量元素会不会导致经常扩容，数组重新分配导致效率低下呢？其实不然，每次增长为原来的1.5倍实际增长的量会越来
+越大的<br>&nbsp; &nbsp;（3）所以Arraylist和Vector不适合进行删除或插入操作</p>
+<p>&nbsp; &nbsp; （4）为了防止数组动态扩充过多，建议创建ArrayList或者Vector时，给定初始容量。</p>
+<p>&nbsp; &nbsp; (5)Arraylist多线程中使用不安全，适合在单线程访问时使用，效率较高，而Vector线程安全，适合在多线程访问时使用，
+效率较低</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>        
+</div></div></div></div>
       
 
       
@@ -258,7 +290,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/18/coder面试时需要注意的常用词汇的拼写/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/28/Arraylist的源码分析以及与vector的区别/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -272,7 +304,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/25/juc包相关类容/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/07/28/java并发问题/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -281,11 +313,6 @@
       </div>
     </a>
   
-  
-    <a href="/2019/07/18/Mybatis-Plus真好用/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 

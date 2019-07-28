@@ -8,31 +8,28 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>我是个弟弟</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析                                        &amp;nbsp; &amp;nbsp;悲观锁： &amp;nbsp; &amp;nbsp; &amp;nbsp;顾名思义，悲观锁，正如其名，它指的是对数">
+  <meta name="description" content="title: java并发问题date: 2019-07-25 12:42:44tags:                            Java并发问题--乐观锁与悲观锁以及乐观锁的一种实现方式-CAS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我是个弟弟">
-<meta property="og:url" content="http://yoursite.com/2019/07/25/mysql中的悲观锁和乐观锁的应用场景和实现方式/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/java并发问题/index.html">
 <meta property="og:site_name" content="我是个弟弟">
-<meta property="og:description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析                                        &amp;nbsp; &amp;nbsp;悲观锁： &amp;nbsp; &amp;nbsp; &amp;nbsp;顾名思义，悲观锁，正如其名，它指的是对数">
+<meta property="og:description" content="title: java并发问题date: 2019-07-25 12:42:44tags:                            Java并发问题--乐观锁与悲观锁以及乐观锁的一种实现方式-CAS">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210648493-302299321.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712211453153-2042737623.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712212827275-532282494.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213042988-1503940553.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213802765-1374589267.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712214316437-2069633589.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000920166-2060373838.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000654722-664730505.png">
-<meta property="og:image" content="http://dl.iteye.com/upload/picture/pic/125402/22a9518f-e355-315f-8d66-d91af4fda723.jpg">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713014150170-1752142532.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013833245-27359745.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013926696-791455815.png">
-<meta property="og:updated_time" content="2019-07-25T03:47:07.843Z">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319183935713-1224322401.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319184016838-1784274955.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319184054182-183582877.png">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319190237932-274252686.png">
+<meta property="og:updated_time" content="2019-07-28T08:53:19.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我是个弟弟">
-<meta name="twitter:description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析                                        &amp;nbsp; &amp;nbsp;悲观锁： &amp;nbsp; &amp;nbsp; &amp;nbsp;顾名思义，悲观锁，正如其名，它指的是对数">
-<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png">
+<meta name="twitter:description" content="title: java并发问题date: 2019-07-25 12:42:44tags:                            Java并发问题--乐观锁与悲观锁以及乐观锁的一种实现方式-CAS">
+<meta name="twitter:image" content="http://common.cnblogs.com/images/copycode.gif">
   
     <link rel="alternative" href="/atom.xml" title="我是个弟弟" type="application/atom+xml">
   
@@ -168,100 +165,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql中的悲观锁和乐观锁的应用场景和实现方式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-java并发问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: mysql中的悲观锁和乐观锁的应用场景和实现方式<br>date: 2019-07-25 11:46:10<br>tags:</p>
+<p>title: java并发问题<br>date: 2019-07-25 12:42:44<br>tags:</p>
 <div id="topics">
     <div class="post">
         <h1 class="postTitle">
-            <a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/kyrieblog/p/11178577.html" target="_blank" rel="noopener">悲观锁和乐观锁的详细分析</a>
+            <a id="cb_post_title_url" class="postTitle2" href="\2019\07\28\java并发问题\index.html">Java并发问题--乐观锁与悲观锁以及乐观锁的一种实现方式-CAS</a>
         </h1>
+        <a id="more"></a>
         <div class="clear"></div>
         <div class="postBody">
-            <div id="cnblogs_post_body" class="blogpost-body"><p><strong>&nbsp; &nbsp;悲观锁：</strong></p>
-<p>&nbsp; &nbsp; &nbsp;顾名思义，悲观锁，正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。&nbsp; &nbsp; &nbsp; &nbsp;悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。</p>
-<p>&nbsp; &nbsp; &nbsp;<strong>使用场景举例：我们以mysql的存储引擎 InnoDB为例(如果不采用锁机制)</strong></p>
-<p><strong>&nbsp; &nbsp; &nbsp; &nbsp;</strong>商品表t_goods中有一个字段为status&nbsp; 为1表示该商品没有下单，为2表示该商品已经被下单了，那么我们对某商品下单之前一定确保该商品未被下单，也就是说该商品的status=1</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;我们对一个商品goods_id = 1 的下单实例</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;1.先查出该商品的信息</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;select status from t_goods where goods_id = 1</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;2,然后根据商品信息生成订单信息</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; insert into t_order(order_id,goods_id) values (null,1)</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;3.更新该商品的信息</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; update t_goods set status = 2 where goods_id = 1</p>
-<p>&nbsp; &nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; <strong>&nbsp;上面的情况在高并发的情况会出现什么问题呢？</strong></p>
-<p><strong>&nbsp; &nbsp; &nbsp; </strong>&nbsp;想一些在这种高并发情况下如果我们不采取任何的锁机制，是不是会出现我们在处理这个事务（就是在下这个订单的时候）别人是不是很可能已经下了这个商品的订单，status被修改为2了，可是我们完全不知情，继续下单，就可能会造成该商品被下单两次，所以这种是极其不安全的</p>
-<p>&nbsp; &nbsp; <strong>因此在上述情况中我们可以采用悲观锁</strong></p>
-<p><strong>&nbsp; &nbsp; &nbsp; &nbsp;</strong>在上面的情况中，商品被查询出来，有一个处理订单的过程，我们可以使用悲观锁机制，当我们查出这个goods信息后，就把当前的数据锁定起来，直到我们修改完毕再解锁，所以在我们处理该goods的时候，就避免了第三者来修改</p>
-<p><span style="color: #ff0000;"><strong>&nbsp; 注意：使用悲观锁之前我们得关闭mysql的自动提交功能，因为mysql是默认开启自动提交功能的</strong></span></p>
-<p><span style="color: #ff0000;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;set autocommit = 0；</strong></span></p>
-<p><strong>&nbsp; &nbsp; &nbsp;</strong>&nbsp;<span style="color: #000000;">下面来简单演示一下吧</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; 1.开启事务（三种方式都可以）</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;begin;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;begin work;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;start transaction;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;2.查询商品信息</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; select status from t_goods where goods_id = 1&nbsp;&nbsp;</span><span style="color: #ff0000;">for update</span><span style="color: #000000;">;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; 3.根据查询来的商品信息生成订单</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; insert into t_order(order_id,goods_id) values (null,1);</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; 4.修改该商品状态为2</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; update t_goods set status = 2 where goods_id = 1;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp;5.提交</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; commit;</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;打开console1（明确指定主键，且查询有数据,采用Row-Level Lock ）</span></p>
-<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png" alt width="328" height="261"></span></p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;打开console2 （如果console1长时间不commit,这里会报错）</p>
-<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210648493-302299321.png" alt width="491" height="163"></p>
-<p>&nbsp; &nbsp; &nbsp;与普通查询不一样的是，我们使用了select…for update的方式，这样就通过数据库实现了悲观锁。此时在t_goods表中，goods_id为1的 那条数据就被我们锁定了，其它的事务必须等本次事务提交之后才能执行。这样我们可以保证当前的数据不会被其它事务修改</p>
-<p>&nbsp; &nbsp;<span style="color: #ff0000;">注意：这里有个问题在是使用悲观锁的时候，如果第一个事务没有commit我们是不能进行该相同数据的写操作的，但是读操作分两种情况，在事务中，只有SELECT ... FOR UPDATE 或LOCK IN SHARE MODE 同一笔数据时会等待其它事务结束后才执行，一般SELECT ... 则不受此影响。</span>拿上面的实例来说，当我执行select status from t_goods where id=1 for update;后。我在另外的事务中如果再次执行select status from t_goods where id=1 for update;则第二个事务会一直等待第一个事务的提交，此时第二个查询处于阻塞的状态，但是如果我是在第二个事务中执行select status from t_goods where id=1;则能正常查询出数据，不会受第一个事务的影响。</p>
-<p><span style="color: #000000;">&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712211453153-2042737623.png" alt width="427" height="189"></span></p>
+            <div id="cnblogs_post_body" class="blogpost-body"><p><strong><span style="font-size: 16px;">首先介绍一些乐观锁与悲观锁:</span></strong></p>
+<p><span style="font-size: 16px;">　　悲观锁：总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。再比如<span style="color: #ff0000;">Java里面的同步原语</span><span style="color: #ff0000;">synchronized关键字的实现也是悲观锁</span>。</span></p>
+<p><span style="font-size: 16px;">　　乐观锁：顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，<span style="color: #ff0000;">但是在更新的时候会判断一下在此期间别人有没有去更新这个数据</span>，可以使用版本号等机制。<span style="color: #ff0000;">乐观锁适用于多读的应用类型</span>，这样可以提高吞吐量，像数据库提供的类似于write_condition机制，其实都是提供的乐观锁。在<span style="color: #ff0000;">Java中java.util.concurrent.atomic包下面的</span><span style="color: #ff0000;">原子变量类就是使用了乐观锁的一种实现方式CAS实现的</span>。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><strong><span style="font-size: 16px;">乐观锁的一种实现方式-CAS(Compare and Swap 比较并交换)：</span></strong></p>
+<p><span style="font-size: 16px;">　　锁存在的问题:</span></p>
+<p><span style="font-size: 16px;">　　　　<span style="color: #ff0000;">Java在JDK1.5之前都是靠 synchronized关键字保证同步的</span>，这种通过使用一致的锁定协议来协调对共享状态的访问，可以确保无论哪个线程持有共享变量的锁，都采用独占的方式来访问这些变量。这就是一种独占锁，独占锁其实就是一种悲观锁，所以可以说 <span style="color: #ff0000;"><strong>synchronized 是悲观锁。</strong></span></span></p>
+<p><span style="font-size: 16px;"><span style="color: #ff0000;"><strong>　　　　</strong><span>悲观锁机制存在以下问题：　　</span></span></span></p>
+<p><span style="font-size: 16px;"><span style="color: #ff0000;"><span>　　　　　　<span style="color: #000000;">1. 在多线程竞争下，加锁、释放锁会导致比较多的上下文切换和调度延时，引起性能问题。</span></span></span></span></p>
+<p><span style="font-size: 16px;"><span style="color: #ff0000;"><span>　　　　　　<span style="color: #000000;">2. 一个线程持有锁会导致其它所有需要此锁的线程挂起。</span></span></span></span></p>
+<p><span style="font-size: 16px;"><span style="color: #ff0000;"><span><span style="color: #000000;">　　　　　　3. 如果一个优先级高的线程等待一个优先级低的线程释放锁会导致优先级倒置，引起性能风险。</span></span></span></span></p>
+<p><span style="font-size: 16px; color: #000000;">　　　　对比于悲观锁的这些问题，另一个更加有效的锁就是乐观锁。其实乐观锁就是：每次不加锁而是假设没有并发冲突而去完成某项操作，如果因为并发冲突失败就重试，直到成功为止。</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　乐观锁：</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　　　乐观锁（ Optimistic Locking ）在上文已经说过了，其实就是一种思想。相对悲观锁而言，乐观锁假设认为数据一般情况下不会产生并发冲突，所以在数据进行提交更新的时候，才会正式对数据是否产生并发冲突进行检测，如果发现并发冲突了，则让返回用户错误的信息，让用户决定如何去做。</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　　　上面提到的乐观锁的概念中其实已经阐述了它的具体实现细节：主要就是两个步骤：<strong><span style="color: #ff0000;">冲突检测和数据更新</span>。</strong>其实现方式有一种比较典型的就是 Compare and Swap ( CAS )。</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　CAS：</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　　　<span style="color: #ff0000;">CAS是乐观锁技术，</span>当多个线程尝试使用CAS同时更新同一个变量时，只有其中一个线程能更新变量的值，而其它线程都失败，失败的线程并不会被挂起，而是被告知这次竞争中失败，并可以再次尝试。　　　</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　　　CAS 操作中包含三个操作数 —— 需要读写的内存位置（V）、进行比较的预期原值（A）和拟写入的新值(B)。如果内存位置V的值与预期原值A相匹配，那么处理器会自动将该位置值更新为新值B。否则处理器不做任何操作。无论哪种情况，它都会在 CAS 指令之前返回该位置的值。（在 CAS 的一些特殊情况下将仅返回 CAS 是否成功，而不提取当前值。）CAS 有效地说明了“ <span style="color: #ff0000;">我认为位置 V 应该包含值 A；如果包含该值，则将 B 放到这个位置；否则，不要更改该位置，只告诉我这个位置现在的值即可</span>。 ”这其实和乐观锁的冲突检查+数据更新的原理是一样的。</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　　　这里再强调一下，乐观锁是一种思想。CAS是这种思想的一种实现方式。</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　JAVA对CAS的支持：<br></span></p>
+<p><span style="font-size: 16px; color: #000000;">　　　　<span style="color: #ff0000;">在JDK1.5 中新增 java.util.concurrent (J.U.C)就是建立在CAS之上的</span>。相对于对于 synchronized 这种阻塞算法，<span style="color: #ff0000;">CAS是非阻塞算法的一种常见实现</span>。所以J.U.C在性能上有了很大的提升。</span></p>
+<p><span style="font-size: 16px; color: #000000;">　　　　以 java.util.concurrent 中的 AtomicInteger 为例，看一下在不使用锁的情况下是如何保证线程安全的。主要理解 getAndIncrement 方法，该方法的作用相当于 ++i 操作。</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> AtomicInteger <span style="color: #0000ff;">extends</span> Number <span style="color: #0000ff;">implements</span><span style="color: #000000;"> java.io.Serializable {  
+</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">volatile</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> value; 
+</span><span style="color: #008080;"> 3</span> 
+<span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> get() {  
+</span><span style="color: #008080;"> 5</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> value;  
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">    }  
+</span><span style="color: #008080;"> 7</span> 
+<span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> getAndIncrement() {  
+</span><span style="color: #008080;"> 9</span>         <span style="color: #0000ff;">for</span><span style="color: #000000;"> (;;) {  
+</span><span style="color: #008080;">10</span>             <span style="color: #0000ff;">int</span> current =<span style="color: #000000;"> get();  
+</span><span style="color: #008080;">11</span>             <span style="color: #0000ff;">int</span> next = current + 1<span style="color: #000000;">;  
+</span><span style="color: #008080;">12</span>             <span style="color: #0000ff;">if</span><span style="color: #000000;"> (compareAndSet(current, next))  
+</span><span style="color: #008080;">13</span>                 <span style="color: #0000ff;">return</span><span style="color: #000000;"> current;  
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">        }  
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">    }  
+</span><span style="color: #008080;">16</span> 
+<span style="color: #008080;">17</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">boolean</span> compareAndSet(<span style="color: #0000ff;">int</span> expect, <span style="color: #0000ff;">int</span><span style="color: #000000;"> update) {  
+</span><span style="color: #008080;">18</span>         <span style="color: #0000ff;">return</span> unsafe.compareAndSwapInt(<span style="color: #0000ff;">this</span><span style="color: #000000;">, valueOffset, expect, update);  
+</span><span style="color: #008080;">19</span> <span style="color: #000000;">    }  
+</span><span style="color: #008080;">20</span> }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>　　　　<span style="font-size: 16px;">在没有锁的机制下,字段value要借助<span style="color: #ff0000;">volatile</span>原语，保证线程间的数据是可见性。这样在获取变量的值的时候才能直接读取。然后来看看 ++i 是怎么做到的。</span></p>
+<p><span style="font-size: 16px;">　　　&nbsp; getAndIncrement 采用了CAS操作，每次从内存中读取数据然后将此数据和 +1 后的结果进行CAS操作，如果成功就返回结果，否则重试直到成功为止。</span></p>
+<p><span style="font-size: 16px;">　　　 &nbsp;而 compareAndSet 利用JNI（Java Native Interface）来完成CPU指令的操作：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">boolean</span> compareAndSet(<span style="color: #0000ff;">int</span> expect, <span style="color: #0000ff;">int</span><span style="color: #000000;"> update) {   
+</span><span style="color: #008080;">2</span>     <span style="color: #0000ff;">return</span> unsafe.compareAndSwapInt(<span style="color: #0000ff;">this</span><span style="color: #000000;">, valueOffset, expect, update);
+</span><span style="color: #008080;">3</span> }　　　</pre>
+</div>
+<p>　　　　<span style="font-size: 16px;">其中unsafe.compareAndSwapInt(this, valueOffset, expect, update);类似如下逻辑：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">this</span> ==<span style="color: #000000;"> expect) {
+</span><span style="color: #008080;">2</span>     <span style="color: #0000ff;">this</span> =<span style="color: #000000;"> update
+</span><span style="color: #008080;">3</span>     <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+</span><span style="color: #008080;">4</span> } <span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+</span><span style="color: #008080;">5</span>     <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+</span><span style="color: #008080;">6</span> }</pre>
+</div>
+<p><span style="font-size: 16px;">　　　　那么比较this ==&nbsp;expect，替换this =&nbsp;update，compareAndSwapInt实现这两个步骤的原子性呢？ 参考CAS的原理</span></p>
+<p><span style="font-size: 16px;">　　CAS原理：<br></span></p>
+<p><span style="font-size: 16px;">　　　　CAS通过调用JNI的代码实现的。</span><span style="font-size: 16px;">而compareAndSwapInt就是借助C来调用CPU底层指令实现的。</span></p>
+<p>　　　　 &nbsp;<span style="font-size: 16px;">下面从分析比较常用的CPU（intel x86）来解释CAS的实现原理。</span></p>
+<p><span style="font-size: 16px;">&nbsp;　　　 &nbsp;下面是sun.misc.Unsafe类的compareAndSwapInt()方法的源代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">native</span> <span style="color: #0000ff;">boolean</span> compareAndSwapInt(Object o, <span style="color: #0000ff;">long</span><span style="color: #000000;"> offset,
+</span><span style="color: #008080;">2</span>                                               <span style="color: #0000ff;">int</span><span style="color: #000000;"> expected,
+</span><span style="color: #008080;">3</span>                                               <span style="color: #0000ff;">int</span> x);</pre>
+</div>
+<p>　　　　 <span style="font-size: 16px;">可以看到这是个本地方法调用。这个本地方法在JDK中依次调用的C++代码为：</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">#define</span> LOCK_IF_MP(mp) __asm cmp mp, 0  \
+<span style="color: #008080;"> 2</span> <span style="color: #000000;">                       __asm je L0      \
+</span><span style="color: #008080;"> 3</span>                        __asm _emit <span style="color: #800080;">0xF0</span><span style="color: #000000;"> \
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">                       __asm L0:
+</span><span style="color: #008080;"> 5</span> 
+<span style="color: #008080;"> 6</span> inline jint     Atomic::cmpxchg    (jint     exchange_value, <span style="color: #0000ff;">volatile</span> jint*<span style="color: #000000;">     dest, jint     compare_value) {
+</span><span style="color: #008080;"> 7</span>   <span style="color: #008000;">//</span><span style="color: #008000;"> alternative for InterlockedCompareExchange</span>
+<span style="color: #008080;"> 8</span>   <span style="color: #0000ff;">int</span> mp =<span style="color: #000000;"> os::is_MP();
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">  __asm {
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">    mov edx, dest
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">    mov ecx, exchange_value
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">    mov eax, compare_value
+</span><span style="color: #008080;">13</span> <span style="color: #000000;">    LOCK_IF_MP(mp)
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">    cmpxchg dword ptr [edx], ecx
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">  }
+</span><span style="color: #008080;">16</span> }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>　　　　<span style="font-size: 16px;">如上面源代码所示，程序会根据当前处理器的类型来决定是否为cmpxchg指令添加lock前缀。如果程序是在多处理器上运行，就为cmpxchg指令加上lock前缀（lock cmpxchg）。反之，如果程序是在单处理器上运行，就省略lock前缀（单处理器自身会维护单处理器内的顺序一致性，不需要lock前缀提供的内存屏障效果）。</span></p>
 <p>&nbsp;</p>
-<p>补充：MySQL select…for update的Row Lock与Table Lock</p>
-<p>上面我们提到，使用select…for update会把数据给锁住，不过我们需要注意一些锁的级别，MySQL InnoDB默认Row-Level Lock，所以只有「明确」地指定主键(id)，MySQL 才会执行Row lock (只锁住被选取的数据) ，否则MySQL 将会执行Table Lock (将整个数据表单给锁住)。</p>
-<p><span style="color: #ff0000;">如果明确有主键，没有数据，则没有lock</span></p>
-<p><span style="color: #ff0000;">&nbsp; &nbsp; <span style="color: #000000;">&nbsp;console1:没数据查询为空</span></span></p>
-<p><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712212827275-532282494.png" alt width="535" height="171"></span></p>
-<p>&nbsp; &nbsp;</p>
-<p>&nbsp;console2:查询结果为空，查询无阻塞，说明console1没有对数据执行锁定</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213042988-1503940553.png" alt width="398" height="99"></p>
-<p><span style="color: #ff0000;">如果没有主键，采用table lock;</span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;">&nbsp;console1:查询正常</span></span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213802765-1374589267.png" alt width="386" height="153"></span></span></p>
-<p>console2 :处于阻塞状态，如果console1长时间不提交，他就会报错，说明这里对全表进行了上锁</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712214316437-2069633589.png" alt width="510" height="86"></p>
-<p>&nbsp;<span style="color: #ff0000;">如果没有定义主键，采用table lock;</span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;">console1:正常查询</span></span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000920166-2060373838.png" alt width="344" height="101"></span></span></p>
+<p><span style="font-size: 16px;">　　<span style="font-size: 16px;">CAS</span>缺点：</span></p>
+<p><span style="font-size: 16px;">　　　　　1. <strong><span style="color: #ff0000;">ABA问题：</span></strong><br></span></p>
+<p><span style="font-size: 16px;">　　　　　　　比如说一个线程one从内存位置V中取出A，这时候另一个线程two也从内存中取出A，并且two进行了一些操作变成了B，然后two又将V位置的数据变成A，这时候线程one进行CAS操作发现内存中仍然是A，然后one操作成功。尽管线程one的CAS操作成功，但可能存在潜藏的问题。如下所示：<br></span></p>
+<p><span style="font-size: 16px;">　　　　　　　<img src="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319183935713-1224322401.png" alt width="109" height="124"></span></p>
+<p><span style="font-size: 16px;">　　　　　　　现有一个用单向链表实现的堆栈，栈顶为A，这时线程T1已经知道A.next为B，然后希望用CAS将栈顶替换为B：</span></p>
+<p>　　　　　　　　　　<span style="font-size: 16px;">head.compareAndSet(A,B);</span></p>
+<p>　　　　　　　　<span style="font-size: 16px;">在T1执行上面这条指令之前，线程T2介入，将A、B出栈，再pushD、C、A，此时堆栈结构如下图，而对象B此时处于游离状态：</span></p>
+<p><span style="font-size: 16px;">　　　　　　　<img src="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319184016838-1784274955.png" alt width="112" height="178"></span></p>
+<p><span style="font-size: 16px;">　　　　　　　此时轮到线程T1执行CAS操作，检测发现栈顶仍为A，所以CAS成功，栈顶变为B，但实际上B.next为null，所以此时的情况变为：</span></p>
+<p><span style="font-size: 16px;">　　　　　　　<img src="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319184054182-183582877.png" alt width="248" height="153"></span></p>
+<p><span style="font-size: 16px;">　　　　　　　其中堆栈中只有B一个元素，C和D组成的链表不再存在于堆栈中，平白无故就把C、D丢掉了。</span></p>
+<p><span style="font-size: 16px;">　　　　　　　</span><span style="font-size: 16px;">从Java1.5开始JDK的atomic包里提供了一个类AtomicStampedReference来解决ABA问题。这个类的compareAndSet方法作用是首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，则以原子方式将该引用和该标志的值设置为给定的更新值。</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">boolean</span><span style="color: #000000;"> compareAndSet(
+</span><span style="color: #008080;">2</span>                V      expectedReference,<span style="color: #008000;">//</span><span style="color: #008000;">预期引用</span>
+<span style="color: #008080;">3</span> 
+<span style="color: #008080;">4</span>                V      newReference,<span style="color: #008000;">//</span><span style="color: #008000;">更新后的引用</span>
+<span style="color: #008080;">5</span> 
+<span style="color: #008080;">6</span>               <span style="color: #0000ff;">int</span>    expectedStamp, <span style="color: #008000;">//</span><span style="color: #008000;">预期标志</span>
+<span style="color: #008080;">7</span> 
+<span style="color: #008080;">8</span>               <span style="color: #0000ff;">int</span>    newStamp <span style="color: #008000;">//</span><span style="color: #008000;">更新后的标志</span>
+<span style="color: #008080;">9</span> ) </pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码" target="_blank" rel="noopener"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>　　　　　　　　<span style="font-size: 16px;">实际应用代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> AtomicStampedReference&lt;Integer&gt; atomicStampedRef = <span style="color: #0000ff;">new</span> AtomicStampedReference&lt;Integer&gt;(100, 0<span style="color: #000000;">);
+</span><span style="color: #008080;">2</span> 
+<span style="color: #008080;">3</span> <span style="color: #000000;">........
+</span><span style="color: #008080;">4</span> 
+<span style="color: #008080;">5</span> atomicStampedRef.compareAndSet(100, 101, stamp, stamp + 1);</pre>
+</div>
 <p>&nbsp;</p>
-<p>console2:查询被阻塞，说明表被console1锁住了</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000654722-664730505.png" alt width="361" height="54"></p>
-<p>&nbsp;<span style="color: #ff0000;">以上就是关于数据库主键对MySQL锁级别的影响实例，需要注意的是，除了主键外，使用索引也会影响数据库的锁定级别</span></p>
-<p><span style="color: #ff0000;"><span style="color: #000000;">谈到了MySQL悲观锁，但是悲观锁并不是适用于任何场景，它也有它存在的一些不足，因为悲观锁大多数情况下依靠数据库的锁机制实现，以保证操作最大程度的独占性。如果加锁的时间过长，其他用户长时间无法访问，影响了程序的并发访问性，同时这样对数据库性能开销影响也很大，特别是对长事务而言，这样的开销往往无法承受。所以与悲观锁相对的，我们有了乐观锁，具体参见下面介绍</span></span></p>
-<p><strong><span style="color: #ff0000;"><span style="color: #000000;">乐观锁介绍：</span></span></strong></p>
 <p>&nbsp;</p>
-<p>&nbsp; &nbsp;乐观锁（ Optimistic Locking ） 相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。那么我们如何实现乐观锁呢，一般来说有以下2种方式：</p>
+<p>&nbsp;　　　<span style="font-size: 16px;">　2.&nbsp;<strong><span style="color: #ff0000;">循环时间长开销大：</span></strong></span></p>
+<p><span style="font-size: 16px;">　　　　　　<span style="color: #ff0000;">自旋CAS（不成功，就一直循环执行，直到成功）</span>如果长时间不成功，会给CPU带来非常大的执行开销。如果JVM能支持处理器提供的pause指令那么效率会有一定的提升，pause指令有两个作用，第一它可以延迟流水线执行指令（de-pipeline）,使CPU不会消耗过多的执行资源，延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零。第二它可以避免在退出循环的时候因内存顺序冲突（memory order violation）而引起CPU流水线被清空（CPU pipeline flush），从而提高CPU的执行效率。</span></p>
+<p><span style="font-size: 16px;">　　　　</span></p>
+<p><span style="font-size: 16px;">　　　　3.&nbsp;<span style="color: #ff0000;"><strong>只能保证一个共享变量的原子操作</strong>：</span></span></p>
+<p><span style="font-size: 16px;">　　　　　　当对一个共享变量执行操作时，我们可以使用循环CAS的方式来保证原子操作，但是对多个共享变量操作时，循环CAS就无法保证操作的原子性，这个时候就可以用锁，或者有一个取巧的办法，就是把多个共享变量合并成一个共享变量来操作。比如有两个共享变量i＝2,j=a，合并一下ij=2a，然后用CAS来操作ij。从<span style="color: #ff0000;">Java1.5开始JDK提供了<strong>AtomicReference</strong></span><strong><span style="color: #ff0000;">类来保证引用对象之间的原子性，你可以把多个变量放在一个对象里来进行CAS操作</span>。</strong></span></p>
 <p>&nbsp;</p>
-<p>1.使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。用下面的一张图来说明：<img class="magplus" title="点击查看原始大小图片" src="http://dl.iteye.com/upload/picture/pic/125402/22a9518f-e355-315f-8d66-d91af4fda723.jpg" alt width="700" height="471"></p>
-<p>如上图所示，如果更新操作顺序执行，则数据的版本（version）依次递增，不会产生冲突。但是如果发生有不同的业务操作对同一版本的数据进行修改，那么，先提交的操作（图中B）会把数据version更新为2，当A在B之后提交更新时发现数据的version已经被修改了，那么A的更新操作会失败</p>
-<p>&nbsp;2.乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。</p>
-<p><strong>使用举例：以MySQL InnoDB为例</strong></p>
-<p>还是拿之前的实例来举：商品goods表中有一个字段status，status为1代表商品未被下单，status为2代表商品已经被下单，那么我们对某个商品下单时必须确保该商品status为1。假设商品的id为1</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713014150170-1752142532.png" alt width="688" height="268"></p>
+<p><span style="font-size: 16px;"><strong>　　</strong>CAS与Synchronized的使用情景：　　　</span></p>
+<p>　　　　<span style="font-size: 16px;">1、对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。</span></p>
+<p><span style="font-size: 16px;">　　　 2、对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</span></p>
+<p><span style="font-size: 16px;">　　　补充： synchronized在jdk1.6之后，已经改进优化。synchronized的底层实现主要依靠Lock-Free的队列，基本思路是自旋后阻塞，竞争切换后继续竞争锁，稍微牺牲了公平性，但获得了高吞吐量。在线程冲突较少的情况下，可以获得和CAS类似的性能；而线程冲突严重的情况下，性能远高于CAS。</span></p>
 <p>&nbsp;</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013833245-27359745.png" alt width="723" height="453"></p>
-<p>输出结果如下：</p>
-<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013926696-791455815.png" alt width="790" height="325"></p>
-<p>&nbsp;由上述可知我们同时查出同一个版本的数据，赋给不同的goods对象，然后先修改good1对象然后执行更新操作，执行成功。然后我们修改goods2，执行更新操作时提示操作失败</p>
-<p>这样我们就简单实现了一个乐观锁机制！</p></div><div id="MySignature"></div>
+<p><span style="font-size: 16px;">　　concurrent包的实现：<br></span></p>
+<p><span style="font-size: 16px;">　　　　由于java的CAS同时具有 volatile 读和volatile写的内存语义，因此Java线程之间的通信现在有了下面四种方式：</span></p>
+<p><span style="font-size: 16px;">　　　　　　1. A线程写volatile变量，随后B线程读这个volatile变量。</span></p>
+<p><span style="font-size: 16px;">　　　　　　2. A线程写volatile变量，随后B线程用CAS更新这个volatile变量。</span></p>
+<p><span style="font-size: 16px;">　　　　　　3.&nbsp;A线程用CAS更新一个volatile变量，随后B线程用CAS更新这个volatile变量。</span></p>
+<p><span style="font-size: 16px;">　　　　　　4.&nbsp;A线程用CAS更新一个volatile变量，随后B线程读这个volatile变量。</span></p>
+<p><span style="font-size: 16px;">　　　　Java的CAS会使用现代处理器上提供的高效机器级别原子指令，这些原子指令以原子方式对内存执行读-改-写操作，这是在多处理器中实现同步的关键（从本质上来说，能够支持原子性读-改-写指令的计算机器，是顺序计算图灵机的异步等价机器，因此任何现代的多处理器都会去支持某种能对内存执行原子性读-改-写操作的原子指令）。同时，volatile变量的读/写和CAS可以实现线程之间的通信。把这些特性整合在一起，就形成了整个concurrent包得以实现的基石。如果我们仔细分析concurrent包的源代码实现，会发现一个通用化的实现模式：</span></p>
+<p><span style="font-size: 16px;">　　　　　　1. 首先，声明共享变量为volatile；　　</span></p>
+<p><span style="font-size: 16px;">　　　　　　2.&nbsp;然后，使用CAS的原子条件更新来实现线程之间的同步；</span></p>
+<p><span style="font-size: 16px;">　　　　　　3.&nbsp;同时，配合以volatile的读/写和CAS所具有的volatile读和写的内存语义来实现线程之间的通信。</span></p>
+<p><span style="font-size: 16px;">　　　　AQS，非阻塞数据结构和原子变量类（java.util.concurrent.atomic包中的类），这些concurrent包中的基础类都是使用这种模式来实现的，而concurrent包中的高层类又是依赖于这些基础类来实现的。从整体来看，concurrent包的实现示意图如下：</span></p>
+<p><span style="font-size: 16px;">　　　　　　<img src="https://images2015.cnblogs.com/blog/1047941/201703/1047941-20170319190237932-274252686.png" alt width="626" height="433"></span></p>
+<p>&nbsp;</p>
+<p>　　<span style="font-size: 16px;">JVM中的CAS（堆中对象的分配）：</span><span style="font-size: 16px;">　</span></p>
+<p>　　　　<span style="font-size: 16px;">Java调用<code>new object()</code>会创建一个对象，这个对象会被分配到JVM的堆中。那么这个对象到底是怎么在堆中保存的呢？</span></p>
+<p>　　　　<span style="font-size: 16px;">首先，<code>new object()</code>执行的时候，这个对象需要多大的空间，其实是已经确定的，因为java中的各种数据类型，占用多大的空间都是固定的（对其原理不清楚的请自行Google）。那么接下来的工作就是在堆中找出那么一块空间用于存放这个对象。 </span><br><span style="font-size: 16px;">
+　　　　在单线程的情况下，一般有两种分配策略：</span></p>
+<p><span style="font-size: 16px;">　　　　　　1.&nbsp;指针碰撞：这种一般适用于内存是绝对规整的（内存是否规整取决于内存回收策略），分配空间的工作只是将指针像空闲内存一侧移动对象大小的距离即可。</span></p>
+<p><span style="font-size: 16px;">　　　　　　2.&nbsp;空闲列表：这种适用于内存非规整的情况，这种情况下JVM会维护一个内存列表，记录哪些内存区域是空闲的，大小是多少。给对象分配空间的时候去空闲列表里查询到合适的区域然后进行分配即可。</span></p>
+<p><span style="font-size: 16px;">　　　　但是JVM不可能一直在单线程状态下运行，那样效率太差了。由于再给一个对象分配内存的时候不是原子性的操作，至少需要以下几步：查找空闲列表、分配内存、修改空闲列表等等，这是不安全的。解决并发时的安全问题也有两种策略：</span></p>
+<p><span style="font-size: 16px;">　　　　　　1. CAS：实际上虚拟机采用CAS配合上失败重试的方式保证更新操作的原子性，原理和上面讲的一样。</span></p>
+<p><span style="font-size: 16px;">　　　　　　2. TLAB：如果使用CAS其实对性能还是会有影响的，所以JVM又提出了一种更高级的优化策略：每个线程在Java堆中预先分配一小块内存，称为本地线程分配缓冲区（TLAB），线程内部需要分配内存时直接在TLAB上分配就行，避免了线程冲突。只有当缓冲区的内存用光需要重新分配内存的时候才会进行CAS操作分配更大的内存空间。 <br>
+　　　　　　虚拟机是否使用TLAB，可以通过<code>-XX:+/-UseTLAB</code>参数来进行配置（jdk5及以后的版本默认是启用TLAB的）。</span></p></div><div id="MySignature"></div>
 <div class="clear"></div>
 <div id="blog_post_info_block">
-<div id="BlogPostCategory"></div>
 <div id="EntryTag"></div>
+
+
+
 </div></div></div></div>
       
 
@@ -341,7 +424,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/25/mysql中的悲观锁和乐观锁的应用场景和实现方式/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/28/java并发问题/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -355,7 +438,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/25/java并发问题/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/07/28/mysql中的悲观锁和乐观锁的应用场景和实现方式/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -365,7 +448,7 @@
     </a>
   
   
-    <a href="/2019/07/25/juc包相关类容/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/28/Arraylist的源码分析以及与vector的区别/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>

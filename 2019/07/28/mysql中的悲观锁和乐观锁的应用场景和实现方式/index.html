@@ -8,17 +8,31 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>我是个弟弟</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+  <meta name="description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我是个弟弟">
-<meta property="og:url" content="http://yoursite.com/2019/07/17/my-first-blog/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/mysql中的悲观锁和乐观锁的应用场景和实现方式/index.html">
 <meta property="og:site_name" content="我是个弟弟">
-<meta property="og:description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+<meta property="og:description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-17T12:25:01.536Z">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210648493-302299321.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712211453153-2042737623.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712212827275-532282494.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213042988-1503940553.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213802765-1374589267.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712214316437-2069633589.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000920166-2060373838.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000654722-664730505.png">
+<meta property="og:image" content="http://dl.iteye.com/upload/picture/pic/125402/22a9518f-e355-315f-8d66-d91af4fda723.jpg">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713014150170-1752142532.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013833245-27359745.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013926696-791455815.png">
+<meta property="og:updated_time" content="2019-07-28T09:01:58.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我是个弟弟">
-<meta name="twitter:description" content="title: my first blogdate: 2019-07-17 20:13:47tags: Arraylist和Linkedlist的区别 1.首先我们从它们底层数据结构来分析       （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的                Arraylist的实现原理是采用一个">
+<meta name="twitter:description" content="title: mysql中的悲观锁和乐观锁的应用场景和实现方式date: 2019-07-25 11:46:10tags:                            悲观锁和乐观锁的详细分析">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png">
   
     <link rel="alternative" href="/atom.xml" title="我是个弟弟" type="application/atom+xml">
   
@@ -154,36 +168,102 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-my-first-blog" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-mysql中的悲观锁和乐观锁的应用场景和实现方式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: my first blog<br>date: 2019-07-17 20:13:47<br>tags:</p>
-<h2 id="Arraylist和Linkedlist的区别"><a href="#Arraylist和Linkedlist的区别" class="headerlink" title="Arraylist和Linkedlist的区别"></a>Arraylist和Linkedlist的区别</h2><p> 1.首先我们从它们底层数据结构来分析</p>
-<pre><code>      （1）Arraylist 和 Vector都是基于数组实现的，你可以从它的单词结构构成都可以看出，但是这个两个还是有一点点区别的
-
-              Arraylist的实现原理是采用一个动态对象数组实现的，默认构造方法创建一个空数组
-
-
-
-
-
-     Vector的实现原理也是采用一个动态对象数组实现的，只不过它的默认构造方法创建一个大小为10的对象数组
-
-
-
-
-
-
-
-
-
-（2） Arraylist第一次添加元素时候，扩展容量为10，之后的扩充算法：原来数组大小+原来数组的一半（也就是1.5倍）</code></pre><p>应该可以很清楚的知道ArrayList底层扩容的原理了。而Vector和Arraylist的扩容机制类似，与Vector不同的是，Vector分两种情况如果增量为0的情况下每次扩容容量是翻倍，即为原来的2倍，而当增量&gt;0的时候，扩充为原来的大小加增量，而ArrayList是1.5倍。看似1.5倍增长的很慢，那经常增加大量元素会不会导致经常扩容，数组重新分配导致效率低下呢？其实不然，每次增长为原来的1.5倍实际增长的量会越来越大的<br>   （3）所以Arraylist和Vector不适合进行删除或插入操作</p>
-<pre><code>（4）为了防止数组动态扩充过多，建议创建ArrayList或者Vector时，给定初始容量。
-
-(5)Arraylist多线程中使用不安全，适合在单线程访问时使用，效率较高，而Vector线程安全，适合在多线程访问时使用，效率较低</code></pre>
+<p>title: mysql中的悲观锁和乐观锁的应用场景和实现方式<br>date: 2019-07-25 11:46:10<br>tags:</p>
+<div id="topics">
+    <div class="post">
+        <h1 class="postTitle">
+            <a id="cb_post_title_url" class="postTitle2" href="\2019\07\28\mysql中的悲观锁和乐观锁的应用场景和实现方式\index.html">悲观锁和乐观锁的详细分析</a>
+        </h1>
+        <a id="more"></a>
+        <div class="clear"></div>
+        <div class="postBody">
+            <div id="cnblogs_post_body" class="blogpost-body"><p><strong>&nbsp; &nbsp;悲观锁：</strong></p>
+<p>&nbsp; &nbsp; &nbsp;顾名思义，悲观锁，正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。&nbsp; &nbsp; &nbsp; &nbsp;悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。</p>
+<p>&nbsp; &nbsp; &nbsp;<strong>使用场景举例：我们以mysql的存储引擎 InnoDB为例(如果不采用锁机制)</strong></p>
+<p><strong>&nbsp; &nbsp; &nbsp; &nbsp;</strong>商品表t_goods中有一个字段为status&nbsp; 为1表示该商品没有下单，为2表示该商品已经被下单了，那么我们对某商品下单之前一定确保该商品未被下单，也就是说该商品的status=1</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;我们对一个商品goods_id = 1 的下单实例</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;1.先查出该商品的信息</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;select status from t_goods where goods_id = 1</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;2,然后根据商品信息生成订单信息</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; insert into t_order(order_id,goods_id) values (null,1)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;3.更新该商品的信息</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; update t_goods set status = 2 where goods_id = 1</p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; <strong>&nbsp;上面的情况在高并发的情况会出现什么问题呢？</strong></p>
+<p><strong>&nbsp; &nbsp; &nbsp; </strong>&nbsp;想一些在这种高并发情况下如果我们不采取任何的锁机制，是不是会出现我们在处理这个事务（就是在下这个订单的时候）别人是不是很可能已经下了这个商品的订单，status被修改为2了，可是我们完全不知情，继续下单，就可能会造成该商品被下单两次，所以这种是极其不安全的</p>
+<p>&nbsp; &nbsp; <strong>因此在上述情况中我们可以采用悲观锁</strong></p>
+<p><strong>&nbsp; &nbsp; &nbsp; &nbsp;</strong>在上面的情况中，商品被查询出来，有一个处理订单的过程，我们可以使用悲观锁机制，当我们查出这个goods信息后，就把当前的数据锁定起来，直到我们修改完毕再解锁，所以在我们处理该goods的时候，就避免了第三者来修改</p>
+<p><span style="color: #ff0000;"><strong>&nbsp; 注意：使用悲观锁之前我们得关闭mysql的自动提交功能，因为mysql是默认开启自动提交功能的</strong></span></p>
+<p><span style="color: #ff0000;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;set autocommit = 0；</strong></span></p>
+<p><strong>&nbsp; &nbsp; &nbsp;</strong>&nbsp;<span style="color: #000000;">下面来简单演示一下吧</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; 1.开启事务（三种方式都可以）</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;begin;</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;begin work;</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp; &nbsp;start transaction;</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;2.查询商品信息</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; select status from t_goods where goods_id = 1&nbsp;&nbsp;</span><span style="color: #ff0000;">for update</span><span style="color: #000000;">;</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; 3.根据查询来的商品信息生成订单</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; insert into t_order(order_id,goods_id) values (null,1);</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; 4.修改该商品状态为2</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; update t_goods set status = 2 where goods_id = 1;</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp;5.提交</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; commit;</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;打开console1（明确指定主键，且查询有数据,采用Row-Level Lock ）</span></p>
+<p><span style="color: #000000;">&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210534266-1893189984.png" alt width="328" height="261"></span></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;打开console2 （如果console1长时间不commit,这里会报错）</p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712210648493-302299321.png" alt width="491" height="163"></p>
+<p>&nbsp; &nbsp; &nbsp;与普通查询不一样的是，我们使用了select…for update的方式，这样就通过数据库实现了悲观锁。此时在t_goods表中，goods_id为1的 那条数据就被我们锁定了，其它的事务必须等本次事务提交之后才能执行。这样我们可以保证当前的数据不会被其它事务修改</p>
+<p>&nbsp; &nbsp;<span style="color: #ff0000;">注意：这里有个问题在是使用悲观锁的时候，如果第一个事务没有commit我们是不能进行该相同数据的写操作的，但是读操作分两种情况，在事务中，只有SELECT ... FOR UPDATE 或LOCK IN SHARE MODE 同一笔数据时会等待其它事务结束后才执行，一般SELECT ... 则不受此影响。</span>拿上面的实例来说，当我执行select status from t_goods where id=1 for update;后。我在另外的事务中如果再次执行select status from t_goods where id=1 for update;则第二个事务会一直等待第一个事务的提交，此时第二个查询处于阻塞的状态，但是如果我是在第二个事务中执行select status from t_goods where id=1;则能正常查询出数据，不会受第一个事务的影响。</p>
+<p><span style="color: #000000;">&nbsp;<img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712211453153-2042737623.png" alt width="427" height="189"></span></p>
+<p>&nbsp;</p>
+<p>补充：MySQL select…for update的Row Lock与Table Lock</p>
+<p>上面我们提到，使用select…for update会把数据给锁住，不过我们需要注意一些锁的级别，MySQL InnoDB默认Row-Level Lock，所以只有「明确」地指定主键(id)，MySQL 才会执行Row lock (只锁住被选取的数据) ，否则MySQL 将会执行Table Lock (将整个数据表单给锁住)。</p>
+<p><span style="color: #ff0000;">如果明确有主键，没有数据，则没有lock</span></p>
+<p><span style="color: #ff0000;">&nbsp; &nbsp; <span style="color: #000000;">&nbsp;console1:没数据查询为空</span></span></p>
+<p><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712212827275-532282494.png" alt width="535" height="171"></span></p>
+<p>&nbsp; &nbsp;</p>
+<p>&nbsp;console2:查询结果为空，查询无阻塞，说明console1没有对数据执行锁定</p>
+<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213042988-1503940553.png" alt width="398" height="99"></p>
+<p><span style="color: #ff0000;">如果没有主键，采用table lock;</span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">&nbsp;console1:查询正常</span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712213802765-1374589267.png" alt width="386" height="153"></span></span></p>
+<p>console2 :处于阻塞状态，如果console1长时间不提交，他就会报错，说明这里对全表进行了上锁</p>
+<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190712214316437-2069633589.png" alt width="510" height="86"></p>
+<p>&nbsp;<span style="color: #ff0000;">如果没有定义主键，采用table lock;</span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">console1:正常查询</span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;"><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000920166-2060373838.png" alt width="344" height="101"></span></span></p>
+<p>&nbsp;</p>
+<p>console2:查询被阻塞，说明表被console1锁住了</p>
+<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713000654722-664730505.png" alt width="361" height="54"></p>
+<p>&nbsp;<span style="color: #ff0000;">以上就是关于数据库主键对MySQL锁级别的影响实例，需要注意的是，除了主键外，使用索引也会影响数据库的锁定级别</span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">谈到了MySQL悲观锁，但是悲观锁并不是适用于任何场景，它也有它存在的一些不足，因为悲观锁大多数情况下依靠数据库的锁机制实现，以保证操作最大程度的独占性。如果加锁的时间过长，其他用户长时间无法访问，影响了程序的并发访问性，同时这样对数据库性能开销影响也很大，特别是对长事务而言，这样的开销往往无法承受。所以与悲观锁相对的，我们有了乐观锁，具体参见下面介绍</span></span></p>
+<p><strong><span style="color: #ff0000;"><span style="color: #000000;">乐观锁介绍：</span></span></strong></p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;乐观锁（ Optimistic Locking ） 相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。那么我们如何实现乐观锁呢，一般来说有以下2种方式：</p>
+<p>&nbsp;</p>
+<p>1.使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。用下面的一张图来说明：<img class="magplus" title="点击查看原始大小图片" src="http://dl.iteye.com/upload/picture/pic/125402/22a9518f-e355-315f-8d66-d91af4fda723.jpg" alt width="700" height="471"></p>
+<p>如上图所示，如果更新操作顺序执行，则数据的版本（version）依次递增，不会产生冲突。但是如果发生有不同的业务操作对同一版本的数据进行修改，那么，先提交的操作（图中B）会把数据version更新为2，当A在B之后提交更新时发现数据的version已经被修改了，那么A的更新操作会失败</p>
+<p>&nbsp;2.乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。</p>
+<p><strong>使用举例：以MySQL InnoDB为例</strong></p>
+<p>还是拿之前的实例来举：商品goods表中有一个字段status，status为1代表商品未被下单，status为2代表商品已经被下单，那么我们对某个商品下单时必须确保该商品status为1。假设商品的id为1</p>
+<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713014150170-1752142532.png" alt width="688" height="268"></p>
+<p>&nbsp;</p>
+<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013833245-27359745.png" alt width="723" height="453"></p>
+<p>输出结果如下：</p>
+<p><img src="https://img2018.cnblogs.com/blog/1663689/201907/1663689-20190713013926696-791455815.png" alt width="790" height="325"></p>
+<p>&nbsp;由上述可知我们同时查出同一个版本的数据，赋给不同的goods对象，然后先修改good1对象然后执行更新操作，执行成功。然后我们修改goods2，执行更新操作时提示操作失败</p>
+<p>这样我们就简单实现了一个乐观锁机制！</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+</div></div></div></div>
       
 
       
@@ -262,7 +342,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/17/my-first-blog/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/28/mysql中的悲观锁和乐观锁的应用场景和实现方式/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,7 +356,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/18/Mybatis-Plus真好用/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/07/28/juc包相关类容/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -286,8 +366,8 @@
     </a>
   
   
-    <a href="/2019/07/17/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2019/07/28/java并发问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   
