@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729020156571.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t5cmllcWluZw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729020512442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t5cmllcWluZw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729020912230.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t5cmllcWluZw==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-07-28T18:48:48.909Z">
+<meta property="og:updated_time" content="2019-07-29T03:32:06.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我是个弟弟">
 <meta name="twitter:description" content="title: jvm中GC的初步了解及其工作原理，极其工作机制date: 2019-07-29 01:28:34tags:                        jvm中对GC的初步分析和了解它的工作机制">
@@ -173,7 +173,8 @@
       
         <hr>
 <p>title: jvm中GC的初步了解及其工作原理，极其工作机制<br>date: 2019-07-29 01:28:34<br>tags:<div id="topics"><br>    <div class="post"><br>        <h1 class="postTitle"><br>            <a id="cb_post_title_url" class="postTitle2" href="\2019\07\29\jvm中GC的初步了解及其工作原理，极其工作机制\index.html">jvm中对GC的初步分析和了解它的工作机制</a><br>        </h1><br>        <a id="more"></a></div></div></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-如何判断是否需要回收"><a href="#1-如何判断是否需要回收" class="headerlink" title="1.如何判断是否需要回收"></a>1.如何判断是否需要回收</h2><p>JVM要实现自动回收垃圾，那么它就需要判断，哪些内存可以回收，哪些不行。下面两个算法是虚拟机用来判断的方法</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p> 自动垃圾回收机制是java的一个特性，相较于c/c++程序员需要自己分配内存，在使用结束后自己回收内存而言，Java实在对程序员太友好了。Java的垃圾回收全部都是由虚拟机自动完成的，不需要程序员额外写啥代码。作为一个Java程序猿，学习GC是非常有必要的，根据项目特性，优化GC也是一个优秀程序猿的基本能力之一。下面就让我们来系统学习一下JVM 的GC吧。</p>
+<h2 id="1-如何判断是否需要回收"><a href="#1-如何判断是否需要回收" class="headerlink" title="1.如何判断是否需要回收"></a>1.如何判断是否需要回收</h2><p>JVM要实现自动回收垃圾，那么它就需要判断，哪些内存可以回收，哪些不行。下面两个算法是虚拟机用来判断的方法</p>
 <h3 id="引用技术算法"><a href="#引用技术算法" class="headerlink" title="引用技术算法"></a>引用技术算法</h3><p>正如算法名，这个算法就是给对象增加一个引用计数，每当对象被别的对象引用时，就将该对象的引用计数加一。所以当一个对象的引用计数为0的话，那么就说明这个对象没有被任何对象使用，那么JVM就可以认为这个对象是可以回收的对象啦。<br><img src="https://img-blog.csdnimg.cn/20190729013309970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t5cmllcWluZw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　这图上的E对象就要被回收了（没有被任何对象引用）<br>缺点也很明显，1.无法区分循环引用的对象（A引用了B，B引用了A），这2个对象的引用计数永远不可能为0，这2个对象无法被JVM回收。2.需要维护对象引用计数的值。</p>
 <h3 id="可达性算法"><a href="#可达性算法" class="headerlink" title="可达性算法"></a>可达性算法</h3><p>  为了解决引用计数算法的缺点，所以就有了可达性算法，这个算法就是通过 GC Roots 的对象作为起始点，然后通过这个节点往下找他引用的对象，直到最外层的叶子节点。当一个对象无法被 GC Roots 找到时，那么它就是可回收对象。<br>  <img src="https://img-blog.csdnimg.cn/20190729013719879.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t5cmllcWluZw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>  　　这图上的E对象就要被回收了（E对象不可达）<br><strong>GC Roots对象的包括如下几种：</strong><br>1).虚拟机栈中的本地变量表中的引用的对象<br>2).方法区中的类静态属性引用的对象<br>3).方法区中的常量引用的对象<br>4).本地方法栈中JNI的引用的对象</p>
 <h2 id="2-内存回收算法"><a href="#2-内存回收算法" class="headerlink" title="2.内存回收算法"></a>2.内存回收算法</h2><p>当JVM已经找到要回收的对象的时候就要开始回收对象了，JVM回收对象有以下三大回收算法</p>
